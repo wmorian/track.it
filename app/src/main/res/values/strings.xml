@@ -2,4 +2,12 @@
     <string name="app_name">Track.it</string>
     <string name="navigation_draw_open">Open navigation drawer</string>
     <string name="navigation_draw_close">Close navigation drawer</string>
+    <string-array name="time_of_day">
+        <item>Morning</item>
+        <item>Forenoon</item>
+        <item>Noon</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+        <item>Night</item>
+    </string-array>
 </resources>
