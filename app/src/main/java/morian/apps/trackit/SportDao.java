@@ -1,5 +1,6 @@
 package morian.apps.trackit;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -24,5 +25,5 @@ public interface SportDao {
     void deleteAllSports();
 
     @Query("SELECT * FROM sport_table ORDER BY day DESC")
-    List<Sport> getAllSports();
+    LiveData<List<Sport>> getAllSports();
 }
