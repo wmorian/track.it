@@ -24,6 +24,6 @@ public interface SportDao {
     @Query("DELETE FROM sport_table")
     void deleteAllSports();
 
-    @Query("SELECT * FROM sport_table ORDER BY day DESC")
+    @Query("SELECT * FROM sport_table ORDER BY day ASC")
     LiveData<List<Sport>> getAllSports();
 }

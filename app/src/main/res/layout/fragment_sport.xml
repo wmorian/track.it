@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/time_of_day" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/kinds_of_sports" />
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/submit_sport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -83,25 +83,10 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Submit"
+        android:onClick="addNewSport"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-
-<!--    When moving this to another fragment, then change the parent ConstaintLayaut to CoordinatorLayout-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submit"
-        tools:listitem="@layout/sport_item" />
+        app:layout_constraintTop_toBottomOf="@+id/length" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

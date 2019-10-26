@@ -27,8 +27,9 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder>
     public void onBindViewHolder(@NonNull SportHolder holder, int position) {
         Sport currentSport = sports.get(position);
         holder.textViewKind.setText(currentSport.getKind());
-        holder.textViewTime.setText( currentSport.getTimeOfDay());
+        holder.textViewTime.setText(currentSport.getTimeOfDay());
         holder.textViewLength.setText(String.valueOf(currentSport.getLength()).concat(" min"));
+        holder.textViewDate.setText(currentSport.getDay());
     }
 
     @Override
@@ -45,12 +46,14 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder>
         private TextView textViewKind;
         private TextView textViewTime;
         private TextView textViewLength;
+        private TextView textViewDate;
 
         public SportHolder(@NonNull View itemView) {
             super(itemView);
             textViewKind = itemView.findViewById(R.id.kinds_of_sports);
             textViewTime = itemView.findViewById(R.id.time_of_day);
             textViewLength = itemView.findViewById(R.id.length);
+            textViewDate = itemView.findViewById(R.id.date_of_sport);
         }
     }
 }

@@ -34,9 +34,7 @@ public class Sport {
         return id;
     }
 
-    public String getDay() {
-        return day;
-    }
+    public String getDay() { return day; }
 
     public String getTimeOfDay() {
         return timeOfDay;

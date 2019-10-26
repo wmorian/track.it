@@ -7,23 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class SportFragment extends Fragment {
 
@@ -51,20 +47,22 @@ public class SportFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycle_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        recyclerView.setHasFixedSize(true);
-
-        final SportAdapter adapter = new SportAdapter();
-        recyclerView.setAdapter(adapter);
-
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
-        sportViewModel.getAllSports().observe(this, new Observer<List<Sport>>() {
+
+        Button submit = view.findViewById(R.id.submit_sport);
+        final Spinner kind = view.findViewById(R.id.kinds_of_sports);
+        final Spinner time = view.findViewById(R.id.time_of_day);
+        final EditText length = view.findViewById(R.id.length);
+        submit.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onChanged(List<Sport> sports) {
-                // update RecyclerView
-                adapter.setSports(sports);
-//                Toast.makeText(getActivity(), "onChanged", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Sport sport = new Sport(
+                        currentDate.getText().toString(),
+                        time.getSelectedItem().toString(),
+                        kind.getSelectedItem().toString(),
+                        Integer.parseInt(length.getText().toString()));
+                sportViewModel.insert(sport);
             }
         });
 
