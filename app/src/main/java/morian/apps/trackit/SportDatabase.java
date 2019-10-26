@@ -45,9 +45,9 @@ public abstract class SportDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            sportDao.insert(new Sport("23.10.2019", "Morning", "Running", 30));
-            sportDao.insert(new Sport("24.10.2019", "Noon", "Running", 40));
-            sportDao.insert(new Sport("25.10.2019", "Evening", "Running", 50));
+            sportDao.insert(new Sport("26.10.2019", "Morning", "Running", 30));
+            sportDao.insert(new Sport("26.10.2019", "Noon", "Running", 40));
+//            sportDao.insert(new Sport("25.10.2019", "Evening", "Running", 50));
             return null;
         }
     }

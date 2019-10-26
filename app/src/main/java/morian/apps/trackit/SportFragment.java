@@ -9,21 +9,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class SportFragment extends Fragment {
 
+    private SportViewModel sportViewModel;
+
     public static final int REQUEST_CODE = 11;
     TextView currentDate;
-
 
     @Nullable
     @Override
@@ -41,6 +48,23 @@ public class SportFragment extends Fragment {
                 DialogFragment fragment = new DatePickerFragment();
                 fragment.setTargetFragment(SportFragment.this, REQUEST_CODE);
                 fragment.show(fm, "datePicker");
+            }
+        });
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycle_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        recyclerView.setHasFixedSize(true);
+
+        final SportAdapter adapter = new SportAdapter();
+        recyclerView.setAdapter(adapter);
+
+        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
+        sportViewModel.getAllSports().observe(this, new Observer<List<Sport>>() {
+            @Override
+            public void onChanged(List<Sport> sports) {
+                // update RecyclerView
+                adapter.setSports(sports);
+//                Toast.makeText(getActivity(), "onChanged", Toast.LENGTH_SHORT).show();
             }
         });
 
