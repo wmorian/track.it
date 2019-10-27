@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,14 +13,21 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
 
 public class SportListFragment extends Fragment {
 
+    private SportAdapter adapter;
     private SportViewModel sportViewModel;
+    private DateViewModel dateViewModel;
+    private String currentDate;
 
     @Nullable
     @Override
@@ -32,18 +38,43 @@ public class SportListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        final SportAdapter adapter = new SportAdapter();
+        adapter = new SportAdapter();
         recyclerView.setAdapter(adapter);
 
-        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
-
-        sportViewModel.getAllSports().observe(this, new Observer<List<Sport>>() {
+        dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
+        dateViewModel.getDate().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(List<Sport> sports) {
-                adapter.setSports(sports);
+            public void onChanged(String s) {
+                currentDate = s;
+                adapter.setSports(getSportsForCurrentDay());
             }
         });
 
+        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
+
+        currentDate = getToday();
+        adapter.setSports(getSportsForCurrentDay());
         return view;
+    }
+
+    private List<Sport> getSportsForCurrentDay() {
+
+        List<Sport> sports = new ArrayList<>();
+
+        try {
+            sports = sportViewModel.getSportsByDate(currentDate);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (sports == null) sports = new ArrayList<>();
+
+        return sports;
+    }
+
+    private String getToday() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = new Date();
+        return formatter.format(date);
     }
 }

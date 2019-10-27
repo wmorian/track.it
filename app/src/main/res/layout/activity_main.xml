@@ -23,15 +23,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/global_date"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Date"-->
-<!--            android:textAlignment="center"-->
-<!--            android:paddingVertical="8dp"-->
-<!--            android:clickable="true" />-->
-
         <FrameLayout
             android:id="@+id/global_date_frame"
             android:layout_width="match_parent"
