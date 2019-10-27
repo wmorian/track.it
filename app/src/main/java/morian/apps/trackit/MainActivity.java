@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ViewPageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tabLayout = findViewById(R.id.tablayout_id);
         viewPager = findViewById(R.id.viewPager_id);
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
+        adapter = new ViewPageAdapter(getSupportFragmentManager());
 
         // Adding Fragments
-        adapter.AddFragment(new SportFragment(), "Sport");
-        adapter.AddFragment(new SportListFragment(), "List");
+        adapter.addFragment(new RootFragment(), "Sport");
+        adapter.addFragment(new SportListFragment(), "List");
 
         //Adapter Setup
         viewPager.setAdapter(adapter);
@@ -70,15 +71,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case (R.id.nav_sport):
-                getSupportFragmentManager().beginTransaction().replace(R.id.viewPager_id,
+                adapter.updateTitle(0, "Sport");
+                adapter.notifyDataSetChanged();
+                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new SportFragment()).commit();
                 break;
             case (R.id.nav_work):
-                getSupportFragmentManager().beginTransaction().replace(R.id.viewPager_id,
+                adapter.updateTitle(0, "Work");
+                adapter.notifyDataSetChanged();
+                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new WorkFragment()).commit();
                 break;
             case (R.id.nav_weather):
-                getSupportFragmentManager().beginTransaction().replace(R.id.viewPager_id,
+                adapter.updateTitle(0, "Weather");
+                adapter.notifyDataSetChanged();
+                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new WeatherFragment()).commit();
                 break;
         }
