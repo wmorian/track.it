@@ -1,4 +1,5 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,34 +17,39 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import morian.apps.trackit.Date.DateFragment;
+import morian.apps.trackit.Date.DateViewModel;
+import morian.apps.trackit.DatePickerFragment;
+import morian.apps.trackit.R;
+
 public class SportFragment extends Fragment {
 
     private SportViewModel sportViewModel;
+    private DateViewModel dateViewModel;
+    private String currentDate;
 
     public static final int REQUEST_CODE = 11;
-    TextView currentDate;
+
+    public SportFragment() {
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sport, container, false);
 
-        Button datePicker = view.findViewById(R.id.date_picker);
-        currentDate = view.findViewById(R.id.current_date);
-        final FragmentManager fm = getActivity().getSupportFragmentManager();
-
-        datePicker.setOnClickListener(new View.OnClickListener() {
+        dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
+        dateViewModel.getDate().observe(this, new Observer<String>() {
 
             @Override
-            public void onClick(View v) {
-                DialogFragment fragment = new DatePickerFragment();
-                fragment.setTargetFragment(SportFragment.this, REQUEST_CODE);
-                fragment.show(fm, "datePicker");
+            public void onChanged(String s) {
+                currentDate = s;
             }
         });
 
@@ -58,7 +64,7 @@ public class SportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Sport sport = new Sport(
-                        currentDate.getText().toString(),
+                        currentDate,
                         time.getSelectedItem().toString(),
                         kind.getSelectedItem().toString(),
                         Integer.parseInt(length.getText().toString()));
@@ -71,20 +77,8 @@ public class SportFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        currentDate.setText(formatter.format(date));
-
         initTimeOfDaySpinner(view);
         initKindOfSportsSpinner(view);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            String date = data.getStringExtra("selectedDate");
-            currentDate.setText(date);
-        }
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {

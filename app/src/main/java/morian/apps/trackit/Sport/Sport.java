@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -9,7 +9,7 @@ public class Sport {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
+    
     private String day;
 
     @ColumnInfo(name = "time_of_day")

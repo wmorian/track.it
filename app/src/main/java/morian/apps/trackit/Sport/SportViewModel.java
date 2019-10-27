@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import android.app.Application;
 
@@ -7,6 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import morian.apps.trackit.Sport.Sport;
+import morian.apps.trackit.Sport.SportRepository;
 
 public class SportViewModel extends AndroidViewModel {
 
@@ -34,6 +38,11 @@ public class SportViewModel extends AndroidViewModel {
 
     public void deleteAllSports() {
         repository.deleteAllNotes();
+    }
+
+    public List<Sport> getSportsByDate(String date) throws ExecutionException, InterruptedException
+    {
+        return repository.getSportsByDay(date);
     }
 
     public LiveData<List<Sport>> getAllSports() {

@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import android.content.Context;
 import android.os.AsyncTask;

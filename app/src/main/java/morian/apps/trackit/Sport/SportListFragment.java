@@ -1,9 +1,10 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import morian.apps.trackit.R;
 
 public class SportListFragment extends Fragment {
 
@@ -32,6 +36,7 @@ public class SportListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
+
         sportViewModel.getAllSports().observe(this, new Observer<List<Sport>>() {
             @Override
             public void onChanged(List<Sport> sports) {

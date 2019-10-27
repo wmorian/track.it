@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import morian.apps.trackit.R;
 
 public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder> {
 

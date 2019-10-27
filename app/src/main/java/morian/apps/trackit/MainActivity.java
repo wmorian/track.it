@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -13,6 +15,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.io.Console;
+
+import morian.apps.trackit.Date.DateFragment;
+import morian.apps.trackit.Date.DateViewModel;
+import morian.apps.trackit.Sport.SportFragment;
+import morian.apps.trackit.Sport.SportListFragment;
+import morian.apps.trackit.Weather.WeatherFragment;
+import morian.apps.trackit.Work.WorkFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,6 +37,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        InitNavigation();
+        InitViewPager();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.global_date_frame,
+                new DateFragment()).commit();
+    }
+
+    private void InitNavigation() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,7 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_draw_open, R.string.navigation_draw_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
+    private void InitViewPager() {
         tabLayout = findViewById(R.id.tablayout_id);
         viewPager = findViewById(R.id.viewPager_id);
         adapter = new ViewPageAdapter(getSupportFragmentManager());
@@ -49,13 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        // init with this fragment when first call
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.viewPager_id,
-                    new SportFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_sport);
-        }
     }
 
     @Override

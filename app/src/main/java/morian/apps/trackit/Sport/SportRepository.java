@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Sport;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -6,6 +6,11 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import morian.apps.trackit.Sport.Sport;
+import morian.apps.trackit.Sport.SportDao;
+import morian.apps.trackit.Sport.SportDatabase;
 
 public class SportRepository {
     private SportDao sportDao;
@@ -31,6 +36,10 @@ public class SportRepository {
 
     public void deleteAllNotes() {
         new DeleteAllSportsAsyncTask(sportDao).execute();
+    }
+
+    public List<Sport> getSportsByDay(String date) throws ExecutionException, InterruptedException {
+        return new GetSportsByDateAsyncTask(sportDao).execute(date).get();
     }
 
     public LiveData<List<Sport>> getAllSports() {
@@ -89,6 +98,18 @@ public class SportRepository {
         @Override
         protected Void doInBackground(Void... voids) {
             sportDao.deleteAllSports();
+            return null;
+        }
+    }
+
+    private static class GetSportsByDateAsyncTask extends AsyncTask<String, Void, List<Sport>> {
+        private SportDao sportDao;
+
+        private GetSportsByDateAsyncTask(SportDao sportDao) { this.sportDao = sportDao; }
+
+        @Override
+        protected List<Sport> doInBackground(String... strings) {
+            sportDao.getSportsByDate(strings[0]);
             return null;
         }
     }
