@@ -11,11 +11,11 @@ An app for tracking your daily life.
 
 ## For every category there are different field to set:
 
-1. Nutrition:
+* Nutrition:
 ..* time of day
 ..* list of foods and beverages
 
-2. Sleep
+* Sleep
 ..* bedtime
 ..* fell asleep
 ..* alarm set
@@ -23,12 +23,12 @@ An app for tracking your daily life.
 ..* sleep quality (subjective)
 ..* slept through the night
 
-3. Sport
+* Sport
 ..* time of day
 ..* kind of sport
 ..* length
 
-4. Work
+* Work
 ..* start time
 ..* end time
 ..* effective (subjective)
