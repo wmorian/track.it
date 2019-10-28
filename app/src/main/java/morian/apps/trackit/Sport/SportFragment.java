@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,8 +47,71 @@ public class SportFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sport, container, false);
 
+        initDate();
+        initDateViewModel();
+        initSubmitButton(view);
+        initLengthHelper(view);
 
-        currentDate = initDate();
+        return view;
+    }
+
+    private void initLengthHelper(View view) {
+
+        Button min60 = view.findViewById(R.id.min_60);
+        Button min30 = view.findViewById(R.id.min_30);
+        Button min10 = view.findViewById(R.id.min_10);
+        Button min5 = view.findViewById(R.id.min_5);
+        ImageButton clear = view.findViewById(R.id.min_clear);
+        final TextView textViewLength = view.findViewById(R.id.length);
+
+        min60.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                addLength(textViewLength, 60);
+            }
+        });
+
+        min30.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                addLength(textViewLength, 30);
+            }
+        });
+
+        min10.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                addLength(textViewLength, 10);
+            }
+        });
+
+        min5.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                addLength(textViewLength, 5);
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                textViewLength.setText("");
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initTimeOfDaySpinner(view);
+        initKindOfSportsSpinner(view);
+    }
+
+    private void initDateViewModel() {
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
         dateViewModel.getDate().observe(this, new Observer<String>() {
 
@@ -56,7 +120,9 @@ public class SportFragment extends Fragment {
                 currentDate = s;
             }
         });
+    }
 
+    private void initSubmitButton(View view) {
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
 
         Button submit = view.findViewById(R.id.submit_sport);
@@ -76,14 +142,6 @@ public class SportFragment extends Fragment {
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initTimeOfDaySpinner(view);
-        initKindOfSportsSpinner(view);
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {
@@ -104,9 +162,20 @@ public class SportFragment extends Fragment {
 
     }
 
-    private String initDate() {
+    private void initDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         Date date = new Date();
-        return formatter.format(date);
+        currentDate = formatter.format(date);
+    }
+
+    private void addLength(TextView textView, int min) {
+        String currentText = textView.getText().toString();
+
+        if (currentText.isEmpty()) {
+            textView.setText(String.valueOf(min));
+        }
+        else {
+            textView.setText(String.valueOf(Integer.parseInt(currentText) + min));
+        }
     }
 }
