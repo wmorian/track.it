@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Adapter Setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.addOnPageChangeListener(pageChangeListener);
     }
 
     @Override
@@ -108,4 +110,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
+    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        int currentPosition = 0;
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            ViewPageFragmentLifcycle fragmentToShow = (ViewPageFragmentLifcycle) adapter.getItem(position);
+            fragmentToShow.onResumeFragment();
+
+            ViewPageFragmentLifcycle fragmentToHide = (ViewPageFragmentLifcycle) adapter.getItem(currentPosition);
+            fragmentToHide.onPauseFragment();
+
+            currentPosition = position;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 }

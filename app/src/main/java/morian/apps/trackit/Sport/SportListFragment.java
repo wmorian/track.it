@@ -21,8 +21,9 @@ import java.util.concurrent.ExecutionException;
 
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
+import morian.apps.trackit.ViewPageFragmentLifcycle;
 
-public class SportListFragment extends Fragment {
+public class SportListFragment extends Fragment implements ViewPageFragmentLifcycle {
 
     private SportAdapter adapter;
     private SportViewModel sportViewModel;
@@ -40,6 +41,7 @@ public class SportListFragment extends Fragment {
 
         adapter = new SportAdapter();
         recyclerView.setAdapter(adapter);
+        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
 
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
         dateViewModel.getDate().observe(this, new Observer<String>() {
@@ -50,10 +52,10 @@ public class SportListFragment extends Fragment {
             }
         });
 
-        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
-
-        currentDate = getToday();
+        // init list with the current date data
+        currentDate = initDate();
         adapter.setSports(getSportsForCurrentDay());
+
         return view;
     }
 
@@ -72,9 +74,19 @@ public class SportListFragment extends Fragment {
         return sports;
     }
 
-    private String getToday() {
+    private String initDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         Date date = new Date();
         return formatter.format(date);
+    }
+
+    @Override
+    public void onPauseFragment() {
+
+    }
+
+    @Override
+    public void onResumeFragment() {
+        adapter.setSports(getSportsForCurrentDay());
     }
 }

@@ -18,6 +18,7 @@ public abstract class SportDatabase extends RoomDatabase {
 
     public static synchronized SportDatabase getInstance(Context context) {
         if (instance == null) {
+//            context.deleteDatabase("sport_database");
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     SportDatabase.class, "sport_database")
                     .fallbackToDestructiveMigration()

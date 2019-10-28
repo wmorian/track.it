@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import morian.apps.trackit.Sport.SportFragment;
 
-public class RootFragment extends Fragment {
+public class RootFragment extends Fragment implements ViewPageFragmentLifcycle{
 
     @Nullable
     @Override
@@ -27,5 +27,15 @@ public class RootFragment extends Fragment {
         transaction.commit();
 
         return view;
+    }
+
+    @Override
+    public void onPauseFragment() {
+
+    }
+
+    @Override
+    public void onResumeFragment() {
+
     }
 }

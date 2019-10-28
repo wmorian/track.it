@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ import morian.apps.trackit.Date.DateFragment;
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.DatePickerFragment;
 import morian.apps.trackit.R;
+import morian.apps.trackit.ViewPageFragmentLifcycle;
 
 public class SportFragment extends Fragment {
 
@@ -44,6 +46,8 @@ public class SportFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sport, container, false);
 
+
+        currentDate = initDate();
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
         dateViewModel.getDate().observe(this, new Observer<String>() {
 
@@ -69,6 +73,7 @@ public class SportFragment extends Fragment {
                         kind.getSelectedItem().toString(),
                         Integer.parseInt(length.getText().toString()));
                 sportViewModel.insert(sport);
+                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -97,5 +102,11 @@ public class SportFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         kindsOfSports.setAdapter(adapter);
 
+    }
+
+    private String initDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = new Date();
+        return formatter.format(date);
     }
 }
