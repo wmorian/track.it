@@ -31,7 +31,7 @@ An app for tracking your daily life.
 * Work
   * start time
   * end time
-  * effective (subjective)
+  * effectively (subjective)
   * on what
 
 ## Storing data
