@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import morian.apps.trackit.Sport.SportFragment;
+import morian.apps.trackit.Nutrition.NutritionFragment;
 
 public class RootFragment extends Fragment implements ViewPageFragmentLifcycle{
 
@@ -22,7 +22,7 @@ public class RootFragment extends Fragment implements ViewPageFragmentLifcycle{
 
         FragmentTransaction transaction = getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.root_add_frame, new SportFragment());
+                .replace(R.id.root_add_frame, new NutritionFragment());
 
         transaction.commit();
 

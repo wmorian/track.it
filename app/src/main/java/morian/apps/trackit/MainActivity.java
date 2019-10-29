@@ -20,6 +20,7 @@ import java.io.Console;
 
 import morian.apps.trackit.Date.DateFragment;
 import morian.apps.trackit.Date.DateViewModel;
+import morian.apps.trackit.Nutrition.NutritionFragment;
 import morian.apps.trackit.Sport.SportFragment;
 import morian.apps.trackit.Sport.SportListFragment;
 import morian.apps.trackit.Weather.WeatherFragment;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter = new ViewPageAdapter(getSupportFragmentManager());
 
         // Adding Fragments
-        adapter.addFragment(new RootFragment(), "Sport");
+        adapter.addFragment(new RootFragment(), "Nutrition");
         adapter.addFragment(new SportListFragment(), "List");
 
         //Adapter Setup
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case (R.id.nav_nutrition):
+                adapter.updateTitle(0, "Nutrition");
+                adapter.notifyDataSetChanged();
+                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
+                        new NutritionFragment()).commit();
+                break;
             case (R.id.nav_sport):
                 adapter.updateTitle(0, "Sport");
                 adapter.notifyDataSetChanged();
