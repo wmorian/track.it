@@ -24,7 +24,7 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return fragmentListTitles.size();
+        return fragmentList.size();
     }
 
     @Nullable
@@ -34,8 +34,12 @@ public class ViewPageAdapter extends FragmentStatePagerAdapter {
     }
 
     public void addFragment(Fragment fragment, String title) {
-        fragmentList.add(fragment);
+        this.addFragment(fragment);
         fragmentListTitles.add(title);
+    }
+
+    public void addFragment(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 
     public void updateTitle(int position, String title) {

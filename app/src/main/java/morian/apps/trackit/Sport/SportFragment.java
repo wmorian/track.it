@@ -1,7 +1,5 @@
 package morian.apps.trackit.Sport;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +14,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import morian.apps.trackit.Date.DateFragment;
 import morian.apps.trackit.Date.DateViewModel;
-import morian.apps.trackit.DatePickerFragment;
 import morian.apps.trackit.R;
-import morian.apps.trackit.ViewPageFragmentLifcycle;
 
 public class SportFragment extends Fragment {
 

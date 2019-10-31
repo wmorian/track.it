@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -16,11 +14,9 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.Console;
-
 import morian.apps.trackit.Date.DateFragment;
-import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.Nutrition.NutritionFragment;
+import morian.apps.trackit.Nutrition.NutritionListFragment;
 import morian.apps.trackit.Sport.SportFragment;
 import morian.apps.trackit.Sport.SportListFragment;
 import morian.apps.trackit.Weather.WeatherFragment;
@@ -61,12 +57,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void InitViewPager() {
         tabLayout = findViewById(R.id.tablayout_id);
-        viewPager = findViewById(R.id.viewPager_id);
+        viewPager = findViewById(R.id.main_viewPager_id);
         adapter = new ViewPageAdapter(getSupportFragmentManager());
 
         // Adding Fragments
         adapter.addFragment(new RootFragment(), "Nutrition");
-        adapter.addFragment(new SportListFragment(), "List");
+//        adapter.addFragment(new SportListFragment(), "List");
+        adapter.addFragment(new NutritionListFragment(), "List");
 
         //Adapter Setup
         viewPager.setAdapter(adapter);

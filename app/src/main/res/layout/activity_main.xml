@@ -32,16 +32,16 @@
             android:id="@+id/tablayout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/tabTextColor"
-            app:tabIndicatorColor="@color/tabIndicatorColor"
             android:background="@color/colorPrimary"
             app:tabGravity="fill"
-            app:tabMode="fixed" />
+            app:tabIndicatorColor="@color/tabIndicatorColor"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/tabTextColor" />
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/main_viewPager_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viewPager_id" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

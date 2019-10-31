@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,237 +17,212 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/add_muesli"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="muesli"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
-        android:id="@+id/egg_table"
-        android:layout_width="wrap_content"
+        android:id="@+id/nutrition_table"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@id/bun_table"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_of_day">
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/eggs"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_span="3"
-                android:text="eggs"
-                android:textAlignment="center" />
-        </TableRow>
-
-        <TableRow>
-
-            <Button
-                android:id="@+id/egg_minus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/egg_count"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:gravity="center"
-                android:minWidth="32dp"
-                android:text="0"
-                android:textAlignment="center" />
-
-            <Button
-                android:id="@+id/egg_plus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="+" />
-        </TableRow>
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/bun_table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/egg_table"
-        app:layout_constraintTop_toBottomOf="@id/time_of_day">
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/buns"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_span="3"
-                android:text="buns"
-                android:textAlignment="center" />
-        </TableRow>
-
-        <TableRow>
-
-            <Button
-                android:id="@+id/bun_minus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/bun_count"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:gravity="center"
-                android:minWidth="32dp"
-                android:text="0"
-                android:textAlignment="center" />
-
-            <Button
-                android:id="@+id/bun_plus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="+" />
-        </TableRow>
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/bread_table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@id/cheese_table"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/egg_table">
-
-        <TableRow>
-
-            <TextView
+            <ToggleButton
                 android:id="@+id/bread"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_span="3"
-                android:text="slice of bread"
-                android:textAlignment="center" />
+                android:layout_weight="1"
+                android:textOff="bread"
+                android:textOn="bread"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/rice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="rice"
+                android:textOn="rice"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/noodle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="noodle"
+                android:textOn="noodle"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/potatoe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="potatoe"
+                android:textOn="potatoe"
+                android:textSize="10dp" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/bread_minus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="-" />
-
-            <TextView
-                android:id="@+id/bread_count"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:gravity="center"
-                android:minWidth="32dp"
-                android:text="0"
-                android:textAlignment="center" />
-
-            <Button
-                android:id="@+id/bread_plus_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="+" />
-        </TableRow>
-    </TableLayout>
-
-    <TableLayout
-        android:id="@+id/cheese_table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/bread_table"
-        app:layout_constraintTop_toBottomOf="@+id/bun_table">
-
-        <TableRow>
-
-            <TextView
+            <ToggleButton
                 android:id="@+id/cheese"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_span="3"
-                android:text="slice of cheese"
-                android:textAlignment="center" />
+                android:layout_weight="1"
+                android:textOff="cheese"
+                android:textOn="cheese"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/sausage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="sausage"
+                android:textOn="sausage"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/honey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="honey"
+                android:textOn="honey"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/muesli"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="muesli"
+                android:textOn="muesli"
+                android:textSize="10dp" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/cheese_minus_one"
-                android:layout_width="wrap_content"
+            <ToggleButton
+                android:id="@+id/meat"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="-" />
+                android:layout_weight="1"
+                android:textOff="meat"
+                android:textOn="meat"
+                android:textSize="10dp" />
 
-            <TextView
-                android:id="@+id/cheese_count"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:gravity="center"
-                android:minWidth="32dp"
-                android:text="0"
-                android:textAlignment="center" />
-
-            <Button
-                android:id="@+id/cheese_plus_one"
-                android:layout_width="wrap_content"
+            <ToggleButton
+                android:id="@+id/chicken"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_column="2"
-                android:minWidth="48dp"
-                android:minHeight="0dp"
-                android:text="+" />
+                android:layout_weight="1"
+                android:textOff="chicken"
+                android:textOn="chicken"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/fish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="fish"
+                android:textOn="fish"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/veggie"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="veggie"
+                android:textOn="veggie"
+                android:textSize="10dp" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ToggleButton
+                android:id="@+id/tea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="tea"
+                android:textOn="tea"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/coffee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="coffee"
+                android:textOn="coffee"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/water"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="water"
+                android:textOn="water"
+                android:textSize="10dp" />
+
+            <ToggleButton
+                android:id="@+id/limo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="limo"
+                android:textOn="limo"
+                android:textSize="10dp" />
+        </TableRow>
+
     </TableLayout>
+
+    <EditText
+        android:id="@+id/miscellenous"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:hint="miscellaneous"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nutrition_table" />
+
+    <Button
+        android:id="@+id/submit_nutrition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="addNewSport"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

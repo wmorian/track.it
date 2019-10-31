@@ -21,7 +21,7 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder>
     @Override
     public SportHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View sportView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sport_item, parent, false);
+                .inflate(R.layout.sport_list_item, parent, false);
         return new SportHolder(sportView);
     }
 
@@ -36,6 +36,7 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder>
 
     @Override
     public int getItemCount() {
+
         return sports.size();
     }
 
