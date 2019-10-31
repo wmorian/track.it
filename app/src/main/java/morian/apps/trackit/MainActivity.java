@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Adding Fragments
         adapter.addFragment(new RootFragment(), "Nutrition");
 //        adapter.addFragment(new SportListFragment(), "List");
-        adapter.addFragment(new NutritionListFragment(), "List");
+        adapter.addFragment(new ListFragment(), "List");
 
         //Adapter Setup
         viewPager.setAdapter(adapter);
@@ -89,12 +89,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 adapter.notifyDataSetChanged();
                 getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new NutritionFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                        new NutritionListFragment()).commit();
                 break;
             case (R.id.nav_sport):
                 adapter.updateTitle(0, "Sport");
                 adapter.notifyDataSetChanged();
                 getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new SportFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                        new SportListFragment()).commit();
                 break;
             case (R.id.nav_work):
                 adapter.updateTitle(0, "Work");
