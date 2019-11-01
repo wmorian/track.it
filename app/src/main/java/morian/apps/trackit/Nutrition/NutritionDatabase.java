@@ -17,6 +17,7 @@ public abstract class NutritionDatabase extends RoomDatabase {
 
     public static synchronized NutritionDatabase getInstance(Context context) {
         if (instance == null) {
+            context.deleteDatabase("nutrition_database");
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),
                     NutritionDatabase.class,

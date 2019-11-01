@@ -11,9 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import morian.apps.trackit.Nutrition.NutritionListFragment;
-import morian.apps.trackit.ViewPageFragmentLifcycle;
 
-public class ListFragment extends Fragment implements ViewPageFragmentLifcycle {
+public class ListFragment extends Fragment implements ViewPageFragmentLifecycle {
 
     @Nullable
     @Override
@@ -36,6 +35,8 @@ public class ListFragment extends Fragment implements ViewPageFragmentLifcycle {
 
     @Override
     public void onResumeFragment() {
-
+        ViewPageFragmentLifecycle listFragment = (ViewPageFragmentLifecycle) getFragmentManager()
+                .findFragmentById(R.id.list_frame);
+        listFragment.onResumeFragment();
     }
 }

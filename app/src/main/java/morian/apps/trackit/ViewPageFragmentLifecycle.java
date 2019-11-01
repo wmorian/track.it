@@ -1,6 +1,6 @@
 package morian.apps.trackit;
 
-public interface ViewPageFragmentLifcycle {
+public interface ViewPageFragmentLifecycle {
     public void onPauseFragment();
     public void onResumeFragment();
 }

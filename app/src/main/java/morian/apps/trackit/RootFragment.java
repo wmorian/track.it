@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import morian.apps.trackit.Nutrition.NutritionFragment;
 
-public class RootFragment extends Fragment implements ViewPageFragmentLifcycle{
+public class RootFragment extends Fragment implements ViewPageFragmentLifecycle {
 
     @Nullable
     @Override

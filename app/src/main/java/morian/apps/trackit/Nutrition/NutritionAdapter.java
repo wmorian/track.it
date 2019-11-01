@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import morian.apps.trackit.R;
 
@@ -30,8 +31,16 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
     public void onBindViewHolder(@NonNull NutritionHolder holder, int position) {
         Nutrition currentNutrition = nutritions.get(position);
         holder.textViewTime.setText(currentNutrition.getTimeOfDay());
-        String items = String.join("\n", currentNutrition.getItems());
-        holder.textViewItems.setText(items);
+
+        StringJoiner joiner = new StringJoiner("\n");
+
+        for (String item :
+                currentNutrition.getItems()) {
+            joiner.add(item);
+        }
+
+//        String items = String.join("\n", currentNutrition.getItems());
+        holder.textViewItems.setText(joiner.toString());
     }
 
     @Override

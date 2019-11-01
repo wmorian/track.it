@@ -5,6 +5,7 @@ import androidx.room.TypeConverter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class ItemListConverter {
 
@@ -26,6 +27,13 @@ public class ItemListConverter {
 
     @TypeConverter
     public static String listToString(List<String> items) {
-        return String.join(";", items);
+        StringJoiner joiner = new StringJoiner(";");
+
+        for (String item :
+                items) {
+            joiner.add(item);
+        }
+
+        return joiner.toString();
     }
 }

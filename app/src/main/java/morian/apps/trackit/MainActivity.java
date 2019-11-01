@@ -129,10 +129,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public void onPageSelected(int position) {
-            ViewPageFragmentLifcycle fragmentToShow = (ViewPageFragmentLifcycle) adapter.getItem(position);
+            ViewPageFragmentLifecycle fragmentToShow = (ViewPageFragmentLifecycle) adapter.getItem(position);
             fragmentToShow.onResumeFragment();
 
-            ViewPageFragmentLifcycle fragmentToHide = (ViewPageFragmentLifcycle) adapter.getItem(currentPosition);
+            ViewPageFragmentLifecycle fragmentToHide = (ViewPageFragmentLifecycle) adapter.getItem(currentPosition);
             fragmentToHide.onPauseFragment();
 
             currentPosition = position;

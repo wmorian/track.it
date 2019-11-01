@@ -21,9 +21,9 @@ import java.util.concurrent.ExecutionException;
 
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
-import morian.apps.trackit.ViewPageFragmentLifcycle;
+import morian.apps.trackit.ViewPageFragmentLifecycle;
 
-public class NutritionListFragment extends Fragment implements ViewPageFragmentLifcycle {
+public class NutritionListFragment extends Fragment implements ViewPageFragmentLifecycle {
 
     private NutritionAdapter adapter;
     private NutritionViewModel nutritionViewModel;
@@ -87,6 +87,7 @@ public class NutritionListFragment extends Fragment implements ViewPageFragmentL
 
     @Override
     public void onResumeFragment() {
+
         adapter.setNutritions(getNutritionsForCurrentDay());
     }
 }

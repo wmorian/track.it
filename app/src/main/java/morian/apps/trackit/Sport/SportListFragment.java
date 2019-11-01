@@ -21,9 +21,9 @@ import java.util.concurrent.ExecutionException;
 
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
-import morian.apps.trackit.ViewPageFragmentLifcycle;
+import morian.apps.trackit.ViewPageFragmentLifecycle;
 
-public class SportListFragment extends Fragment implements ViewPageFragmentLifcycle {
+public class SportListFragment extends Fragment implements ViewPageFragmentLifecycle {
 
     private SportAdapter adapter;
     private SportViewModel sportViewModel;
