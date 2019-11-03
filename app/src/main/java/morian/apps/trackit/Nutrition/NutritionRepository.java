@@ -8,14 +8,17 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import morian.apps.trackit.TrackDatabase;
+
 public class NutritionRepository {
 
     private NutritionDao nutritionDao;
     private LiveData<List<Nutrition>> allNutritions;
 
     public NutritionRepository(Application application) {
-        NutritionDatabase database = NutritionDatabase.getInstance(application);
-        nutritionDao = database.nutritionDao();
+//        NutritionDatabase database = NutritionDatabase.getInstance(application);
+        TrackDatabase database = TrackDatabase.getInstance(application);
+        nutritionDao = database.getNutritionDao();
         allNutritions = nutritionDao.getAllNutritions();
     }
 

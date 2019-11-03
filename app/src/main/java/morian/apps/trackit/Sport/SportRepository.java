@@ -4,22 +4,20 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import morian.apps.trackit.Sport.Sport;
-import morian.apps.trackit.Sport.SportDao;
-import morian.apps.trackit.Sport.SportDatabase;
+import morian.apps.trackit.TrackDatabase;
 
 public class SportRepository {
     private SportDao sportDao;
     private LiveData<List<Sport>> allSports;
 
     public SportRepository(Application application) {
-        SportDatabase database = SportDatabase.getInstance(application);
-        sportDao = database.sportDao();
+//        SportDatabase database = SportDatabase.getInstance(application);
+        TrackDatabase database = TrackDatabase.getInstance(application);
+        sportDao = database.getSportDao();
         allSports = sportDao.getAllSports();
     }
 
