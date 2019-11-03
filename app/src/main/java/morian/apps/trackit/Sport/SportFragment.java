@@ -11,9 +11,11 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,8 +31,7 @@ public class SportFragment extends Fragment {
     private SportViewModel sportViewModel;
     private DateViewModel dateViewModel;
     private String currentDate;
-
-    public static final int REQUEST_CODE = 11;
+    private String kindOfSport;
 
     public SportFragment() {
     }
@@ -43,9 +44,106 @@ public class SportFragment extends Fragment {
         initDate();
         initDateViewModel();
         initSubmitButton(view);
+        initSportButtons(view);
         initLengthHelper(view);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        initTimeOfDaySpinner(view);
+    }
+
+    public void onSportClicked(View view) {
+        ConstraintLayout parent = (ConstraintLayout) view.getParent();
+
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View current = parent.getChildAt(i);
+            if (current != view && current instanceof ToggleButton) {
+                ((ToggleButton) current).setChecked(false);
+            }
+        }
+        ToggleButton activeSport = ((ToggleButton) view);
+        activeSport.setChecked(true);
+
+        switch (activeSport.getId()) {
+            case R.id.running:
+                kindOfSport = "running";
+                break;
+            case R.id.exercise:
+                kindOfSport = "exercise";
+                break;
+            case R.id.stretching:
+                kindOfSport = "stretching";
+                break;
+            case R.id.yoga:
+                kindOfSport = "yoga";
+                break;
+            case R.id.cycling:
+                kindOfSport = "cycling";
+                break;
+            case R.id.walking:
+                kindOfSport = "walking";
+                break;
+        }
+    }
+
+    private void initDateViewModel() {
+        dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
+        dateViewModel.getDate().observe(this, new Observer<String>() {
+
+            @Override
+            public void onChanged(String s) {
+                currentDate = s;
+            }
+        });
+    }
+
+    private void initSubmitButton(View view) {
+        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
+
+        Button submit = view.findViewById(R.id.submit_sport);
+        final Spinner time = view.findViewById(R.id.time_of_day);
+        final EditText length = view.findViewById(R.id.length);
+        submit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Sport sport = new Sport(
+                        currentDate,
+                        time.getSelectedItem().toString(),
+                        kindOfSport,
+                        Integer.parseInt(length.getText().toString()));
+                sportViewModel.insert(sport);
+
+                length.setText("");
+                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initTimeOfDaySpinner(@NonNull View view) {
+        Spinner timeOfDay = view.findViewById(R.id.time_of_day);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeOfDay.setAdapter(adapter);
+
+    }
+
+    private void initSportButtons(View view) {
+        ConstraintLayout layout = view.findViewById(R.id.kinds_of_sports);
+
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            ToggleButton btn = (ToggleButton) layout.getChildAt(i);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSportClicked(v);
+                }
+            });
+        }
     }
 
     private void initLengthHelper(View view) {
@@ -96,63 +194,6 @@ public class SportFragment extends Fragment {
                 textViewLength.setText("");
             }
         });
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        initTimeOfDaySpinner(view);
-        initKindOfSportsSpinner(view);
-    }
-
-    private void initDateViewModel() {
-        dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
-        dateViewModel.getDate().observe(this, new Observer<String>() {
-
-            @Override
-            public void onChanged(String s) {
-                currentDate = s;
-            }
-        });
-    }
-
-    private void initSubmitButton(View view) {
-        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
-
-        Button submit = view.findViewById(R.id.submit_sport);
-        final Spinner kind = view.findViewById(R.id.kinds_of_sports);
-        final Spinner time = view.findViewById(R.id.time_of_day);
-        final EditText length = view.findViewById(R.id.length);
-        submit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Sport sport = new Sport(
-                        currentDate,
-                        time.getSelectedItem().toString(),
-                        kind.getSelectedItem().toString(),
-                        Integer.parseInt(length.getText().toString()));
-                sportViewModel.insert(sport);
-                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void initTimeOfDaySpinner(@NonNull View view) {
-        Spinner timeOfDay = view.findViewById(R.id.time_of_day);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timeOfDay.setAdapter(adapter);
-
-    }
-
-    private void initKindOfSportsSpinner(@NonNull View view) {
-        Spinner kindsOfSports = view.findViewById(R.id.kinds_of_sports);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.sports, android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        kindsOfSports.setAdapter(adapter);
-
     }
 
     private void initDate() {

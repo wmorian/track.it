@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,8 +44,19 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
         adapter = new SportAdapter();
         recyclerView.setAdapter(adapter);
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
-
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
+
+        subscribeToDateChange();
+        getItemTouchHelperForDeleteOnSwipe().attachToRecyclerView(recyclerView);
+
+        // init list with the current date data
+        currentDate = initDate();
+        adapter.setSports(getSportsForCurrentDay());
+
+        return view;
+    }
+
+    private void subscribeToDateChange() {
         dateViewModel.getDate().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -51,12 +64,21 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
                 adapter.setSports(getSportsForCurrentDay());
             }
         });
+    }
 
-        // init list with the current date data
-        currentDate = initDate();
-        adapter.setSports(getSportsForCurrentDay());
+    private ItemTouchHelper getItemTouchHelperForDeleteOnSwipe() {
+        return new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-        return view;
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                sportViewModel.delete(adapter.getSportAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(getActivity(), "Deleted!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private List<Sport> getSportsForCurrentDay() {

@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +19,15 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
 
     private List<Nutrition> nutritions = new ArrayList<>();
 
+
     @NonNull
     @Override
     public NutritionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View nutritionView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.nutrition_list_item, parent, false);
+
+        RecyclerView recyclerView =  nutritionView.findViewById(R.id.recycle_view);
+        nutritionView.setOnLongClickListener(new OnItemLongClickListener());
 
         return new NutritionHolder(nutritionView);
     }
@@ -33,13 +38,11 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
         holder.textViewTime.setText(currentNutrition.getTimeOfDay());
 
         StringJoiner joiner = new StringJoiner("\n");
-
         for (String item :
                 currentNutrition.getItems()) {
             joiner.add(item);
         }
 
-//        String items = String.join("\n", currentNutrition.getItems());
         holder.textViewItems.setText(joiner.toString());
     }
 
@@ -53,6 +56,10 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
         notifyDataSetChanged();
     }
 
+    public Nutrition getNutritionAt(int position) {
+        return nutritions.get(position);
+    }
+
     class NutritionHolder extends RecyclerView.ViewHolder {
         private TextView textViewTime;
         private TextView textViewItems;
@@ -61,6 +68,18 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
             super(itemView);
             textViewTime = itemView.findViewById(R.id.time_of_day);
             textViewItems = itemView.findViewById(R.id.items);
+        }
+    }
+
+    class OnItemLongClickListener implements View.OnLongClickListener {
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            Toast.makeText(v.getContext(), "Long Click", Toast.LENGTH_SHORT).show();
+
+
+            return false;
         }
     }
 }

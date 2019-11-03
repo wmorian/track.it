@@ -63,7 +63,7 @@ public class NutritionFragment extends Fragment {
         nutritionViewModel = ViewModelProviders.of(this).get(NutritionViewModel.class);
 
         Button submit = view.findViewById(R.id.submit_nutrition);
-        final List<String> items = new ArrayList<>();
+
         final TableLayout table = view.findViewById(R.id.nutrition_table);
         final Spinner time = view.findViewById(R.id.time_of_day);
         final EditText editTextMisc = view.findViewById(R.id.miscellenous);
@@ -71,6 +71,7 @@ public class NutritionFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<String> items = new ArrayList<>();
 
                 int numOfTableRows = table.getChildCount();
                 for (int i = 0; i < numOfTableRows; i++) {
@@ -95,6 +96,8 @@ public class NutritionFragment extends Fragment {
                             miscItems) {
                         items.add(item);
                     }
+
+                    editTextMisc.setText("");
                 }
 
                 Nutrition nutrition = new Nutrition(
@@ -104,7 +107,7 @@ public class NutritionFragment extends Fragment {
                 );
 
                 nutritionViewModel.insert(nutrition);
-                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
         });
 

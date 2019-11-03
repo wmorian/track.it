@@ -45,6 +45,10 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportHolder>
         notifyDataSetChanged();
     }
 
+    public Sport getSportAt(int position) {
+        return sports.get(position);
+    }
+
     class SportHolder extends RecyclerView.ViewHolder {
         private TextView textViewKind;
         private TextView textViewTime;

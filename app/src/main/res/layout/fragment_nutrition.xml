@@ -94,12 +94,12 @@
                 android:textSize="10dp" />
 
             <ToggleButton
-                android:id="@+id/honey"
+                android:id="@+id/egg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textOff="honey"
-                android:textOn="honey"
+                android:textOff="egg"
+                android:textOn="egg"
                 android:textSize="10dp" />
 
             <ToggleButton

@@ -3,12 +3,12 @@
     <string name="navigation_draw_open">Open navigation drawer</string>
     <string name="navigation_draw_close">Close navigation drawer</string>
     <string-array name="time_of_day">
-        <item>Morning</item>
-        <item>Forenoon</item>
-        <item>Noon</item>
-        <item>Afternoon</item>
-        <item>Evening</item>
-        <item>Night</item>
+        <item>morning</item>
+        <item>forenoon</item>
+        <item>noon</item>
+        <item>afternoon</item>
+        <item>evening</item>
+        <item>night</item>
     </string-array>
     <string-array name="sports">
         <item>Running</item>

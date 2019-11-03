@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Adding Fragments
         adapter.addFragment(new RootFragment(), "Nutrition");
-//        adapter.addFragment(new SportListFragment(), "List");
         adapter.addFragment(new ListFragment(), "List");
 
         //Adapter Setup
