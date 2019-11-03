@@ -19,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,14 +57,15 @@ public class SportFragment extends Fragment {
     }
 
     public void onSportClicked(View view) {
-        ConstraintLayout parent = (ConstraintLayout) view.getParent();
 
+        ConstraintLayout parent = (ConstraintLayout) view.getParent();
         for (int i = 0; i < parent.getChildCount(); i++) {
             View current = parent.getChildAt(i);
             if (current != view && current instanceof ToggleButton) {
                 ((ToggleButton) current).setChecked(false);
             }
         }
+
         ToggleButton activeSport = ((ToggleButton) view);
         activeSport.setChecked(true);
 
@@ -89,6 +91,16 @@ public class SportFragment extends Fragment {
         }
     }
 
+    private void resetSportButtons(View view) {
+        final ConstraintLayout constraintLayout = view.findViewById(R.id.kinds_of_sports);
+        for (int i = 0; i < constraintLayout.getChildCount(); i++) {
+            View current = constraintLayout.getChildAt(i);
+            if (current instanceof ToggleButton) {
+                ((ToggleButton) current).setChecked(false);
+            }
+        }
+    }
+
     private void initDateViewModel() {
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
         dateViewModel.getDate().observe(this, new Observer<String>() {
@@ -100,12 +112,13 @@ public class SportFragment extends Fragment {
         });
     }
 
-    private void initSubmitButton(View view) {
+    private void initSubmitButton(final View view) {
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
 
         Button submit = view.findViewById(R.id.submit_sport);
         final Spinner time = view.findViewById(R.id.time_of_day);
         final EditText length = view.findViewById(R.id.length);
+
         submit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -117,6 +130,7 @@ public class SportFragment extends Fragment {
                         Integer.parseInt(length.getText().toString()));
                 sportViewModel.insert(sport);
 
+                resetSportButtons(view);
                 length.setText("");
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
