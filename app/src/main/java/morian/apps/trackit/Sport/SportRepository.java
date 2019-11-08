@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import morian.apps.trackit.TrackDatabase;
+import morian.apps.trackit.Database.TrackDatabase;
 
 public class SportRepository {
     private SportDao sportDao;

@@ -1,4 +1,4 @@
-package morian.apps.trackit.Nutrition;
+package morian.apps.trackit.Database;
 
 import androidx.room.TypeConverter;
 
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class ItemListConverter {
+public class StringListConverter {
 
     @TypeConverter
     public static List<String> stringToList(String data) {

@@ -1,4 +1,4 @@
-package morian.apps.trackit;
+package morian.apps.trackit.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +23,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
 
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);

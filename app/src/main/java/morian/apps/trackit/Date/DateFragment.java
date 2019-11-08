@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProviders;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import morian.apps.trackit.DatePickerFragment;
 import morian.apps.trackit.R;
 
 public class DateFragment extends Fragment {
