@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -42,7 +44,7 @@ public class SportViewModel extends AndroidViewModel {
         repository.deleteAllNotes();
     }
 
-    public List<Sport> getSportsByDate(String date)
+    public List<Sport> getSportsByDate(LocalDate date)
             throws ExecutionException, InterruptedException {
 
         return repository.getSportsByDay(date);

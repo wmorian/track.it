@@ -1,7 +1,11 @@
 package morian.apps.trackit.Work;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import java.util.Date;
 
@@ -10,15 +14,58 @@ import java.util.Date;
 public class Work {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
 
-    public Date date;
+    private LocalDate date;
 
-    public Date startTime;
+    private Workplace workplace;
 
-    public Date endTime;
+    @ColumnInfo(name = "start_time")
+    private LocalTime startTime;
 
-    public String subject;
+    @ColumnInfo(name = "end_time")
+    private LocalTime endTime;
 
-    public Boolean satisfied;
+    private String subject;
+
+    private Boolean satisfied;
+
+    public Work(LocalDate date, Workplace workplace, LocalTime startTime, LocalTime endTime, String subject, Boolean satisfied) {
+        this.date = date;
+        this.workplace = workplace;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.subject = subject;
+        this.satisfied = satisfied;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Workplace getWorkplace() { return workplace; }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public Boolean getSatisfied() {
+        return satisfied;
+    }
 }

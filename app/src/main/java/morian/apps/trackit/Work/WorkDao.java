@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import org.joda.time.LocalDate;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +23,6 @@ public interface WorkDao {
     @Delete
     void delete(Work work);
 
-    @Query("SELECT * FROM work_table WHERE date=:currentDay ORDER BY startTime ASC")
-    List<Work> getWorksByDate(Date currentDay);
+    @Query("SELECT * FROM work_table WHERE date=:currentDay ORDER BY start_time ASC")
+    List<Work> getWorksByDate(LocalDate currentDay);
 }

@@ -5,7 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -31,7 +32,7 @@ public class WorkViewModel extends AndroidViewModel {
         repository.delete(work);
     }
 
-    public List<Work> getWorksByDate(Date date)
+    public List<Work> getWorksByDate(LocalDate date)
             throws ExecutionException, InterruptedException {
 
         return repository.getWorksByDate(date);

@@ -21,6 +21,7 @@ import morian.apps.trackit.Sport.SportFragment;
 import morian.apps.trackit.Sport.SportListFragment;
 import morian.apps.trackit.Weather.WeatherFragment;
 import morian.apps.trackit.Work.WorkFragment;
+import morian.apps.trackit.Work.WorkListFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 adapter.notifyDataSetChanged();
                 getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new WorkFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                        new WorkListFragment()).commit();
                 break;
             case (R.id.nav_weather):
                 adapter.updateTitle(0, "Weather");

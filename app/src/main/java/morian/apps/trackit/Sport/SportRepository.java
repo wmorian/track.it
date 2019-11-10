@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -40,7 +42,7 @@ public class SportRepository {
         new DeleteAllSportsAsyncTask(sportDao).execute();
     }
 
-    public List<Sport> getSportsByDay(String date)
+    public List<Sport> getSportsByDay(LocalDate date)
             throws ExecutionException, InterruptedException {
 
         return new GetSportsByDateAsyncTask(sportDao).execute(date).get();
@@ -106,7 +108,7 @@ public class SportRepository {
         }
     }
 
-    private static class GetSportsByDateAsyncTask extends AsyncTask<String, Void, List<Sport>> {
+    private static class GetSportsByDateAsyncTask extends AsyncTask<LocalDate, Void, List<Sport>> {
         private SportDao sportDao;
 
         private GetSportsByDateAsyncTask(SportDao sportDao) {
@@ -114,8 +116,8 @@ public class SportRepository {
         }
 
         @Override
-        protected List<Sport> doInBackground(String... strings) {
-            return sportDao.getSportsByDate(strings[0]);
+        protected List<Sport> doInBackground(LocalDate... dates) {
+            return sportDao.getSportsByDate(dates[0]);
         }
     }
 }

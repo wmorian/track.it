@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -16,7 +18,6 @@ public class NutritionRepository {
     private LiveData<List<Nutrition>> allNutritions;
 
     public NutritionRepository(Application application) {
-//        NutritionDatabase database = NutritionDatabase.getInstance(application);
         TrackDatabase database = TrackDatabase.getInstance(application);
         nutritionDao = database.getNutritionDao();
         allNutritions = nutritionDao.getAllNutritions();
@@ -38,7 +39,7 @@ public class NutritionRepository {
         new DeleteAllNutritionsAsyncTask(nutritionDao).execute();
     }
 
-    public List<Nutrition> getNutritionsByDate(String date)
+    public List<Nutrition> getNutritionsByDate(LocalDate date)
             throws ExecutionException, InterruptedException {
         return new GetNutritionsByDateAsyncTask(nutritionDao).execute(date).get();
     }
@@ -107,7 +108,7 @@ public class NutritionRepository {
     }
 
 
-    private static class GetNutritionsByDateAsyncTask extends AsyncTask<String, Void, List<Nutrition>> {
+    private static class GetNutritionsByDateAsyncTask extends AsyncTask<LocalDate, Void, List<Nutrition>> {
         private NutritionDao nutritionDao;
 
         public GetNutritionsByDateAsyncTask(NutritionDao nutritionDao) {
@@ -115,8 +116,8 @@ public class NutritionRepository {
         }
 
         @Override
-        protected List<Nutrition> doInBackground(String... strings) {
-            return this.nutritionDao.getNutritionsByDate(strings[0]);
+        protected List<Nutrition> doInBackground(LocalDate... dates) {
+            return this.nutritionDao.getNutritionsByDate(dates[0]);
         }
     }
 }

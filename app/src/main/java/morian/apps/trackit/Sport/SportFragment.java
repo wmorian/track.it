@@ -19,10 +19,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
@@ -31,7 +29,7 @@ public class SportFragment extends Fragment {
 
     private SportViewModel sportViewModel;
     private DateViewModel dateViewModel;
-    private String currentDate;
+    private LocalDate currentDate;
     private String kindOfSport;
 
     public SportFragment() {
@@ -92,7 +90,7 @@ public class SportFragment extends Fragment {
     }
 
     private void resetSportButtons(View view) {
-        final ConstraintLayout constraintLayout = view.findViewById(R.id.kinds_of_sports);
+        final ConstraintLayout constraintLayout = view.findViewById(R.id.subject);
         for (int i = 0; i < constraintLayout.getChildCount(); i++) {
             View current = constraintLayout.getChildAt(i);
             if (current instanceof ToggleButton) {
@@ -103,10 +101,10 @@ public class SportFragment extends Fragment {
 
     private void initDateViewModel() {
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
-        dateViewModel.getDate().observe(this, new Observer<String>() {
+        dateViewModel.getDate().observe(this, new Observer<LocalDate>() {
 
             @Override
-            public void onChanged(String s) {
+            public void onChanged(LocalDate s) {
                 currentDate = s;
             }
         });
@@ -116,8 +114,8 @@ public class SportFragment extends Fragment {
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
 
         Button submit = view.findViewById(R.id.submit_sport);
-        final Spinner time = view.findViewById(R.id.time_of_day);
-        final EditText length = view.findViewById(R.id.length);
+        final Spinner time = view.findViewById(R.id.start_time);
+        final EditText length = view.findViewById(R.id.place);
 
         submit.setOnClickListener(new View.OnClickListener() {
 
@@ -138,7 +136,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {
-        Spinner timeOfDay = view.findViewById(R.id.time_of_day);
+        Spinner timeOfDay = view.findViewById(R.id.start_time);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -147,7 +145,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initSportButtons(View view) {
-        ConstraintLayout layout = view.findViewById(R.id.kinds_of_sports);
+        ConstraintLayout layout = view.findViewById(R.id.subject);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             ToggleButton btn = (ToggleButton) layout.getChildAt(i);
@@ -167,7 +165,7 @@ public class SportFragment extends Fragment {
         Button min10 = view.findViewById(R.id.min_10);
         Button min5 = view.findViewById(R.id.min_5);
         ImageButton clear = view.findViewById(R.id.min_clear);
-        final TextView textViewLength = view.findViewById(R.id.length);
+        final TextView textViewLength = view.findViewById(R.id.place);
 
         min60.setOnClickListener(new View.OnClickListener() {
 
@@ -211,9 +209,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        currentDate = formatter.format(date);
+        currentDate = LocalDate.now();
     }
 
     private void addLength(TextView textView, int min) {

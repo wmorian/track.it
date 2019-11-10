@@ -8,6 +8,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 
 import morian.apps.trackit.Sport.Sport;
@@ -27,9 +29,9 @@ public interface SportDao {
     @Query("DELETE FROM sport_table")
     void deleteAllSports();
 
-    @Query("SELECT * FROM sport_table ORDER BY day ASC")
+    @Query("SELECT * FROM sport_table ORDER BY date ASC")
     LiveData<List<Sport>> getAllSports();
 
-    @Query("SELECT * FROM sport_table WHERE day=:currentDay ORDER BY day ASC")
-    List<Sport> getSportsByDate(String currentDay);
+    @Query("SELECT * FROM sport_table WHERE date=:currentDay ORDER BY date ASC")
+    List<Sport> getSportsByDate(LocalDate currentDay);
 }

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.joda.time.LocalDate;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +32,7 @@ public class NutritionListFragment extends Fragment implements ViewPageFragmentL
     private NutritionAdapter adapter;
     private NutritionViewModel nutritionViewModel;
     private DateViewModel dateViewModel;
-    private String currentDate;
+    private LocalDate currentDate;
 
     @Nullable
     @Override
@@ -50,16 +52,16 @@ public class NutritionListFragment extends Fragment implements ViewPageFragmentL
         getItemTouchHelperForDeleteOnSwipe().attachToRecyclerView(recyclerView);
 
         // init list with the current date data
-        currentDate = initDate();
+        initDate();
         adapter.setNutritions(getNutritionsForCurrentDay());
 
         return view;
     }
 
     private void subscribeToDateChange() {
-        dateViewModel.getDate().observe(this, new Observer<String>() {
+        dateViewModel.getDate().observe(this, new Observer<LocalDate>() {
             @Override
-            public void onChanged(String date) {
+            public void onChanged(LocalDate date) {
                 currentDate = date;
                 adapter.setNutritions(getNutritionsForCurrentDay());
             }
@@ -96,10 +98,8 @@ public class NutritionListFragment extends Fragment implements ViewPageFragmentL
         return nutritions;
     }
 
-    private String initDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        return formatter.format(date);
+    private void initDate() {
+        currentDate = LocalDate.now();
     }
 
     @Override

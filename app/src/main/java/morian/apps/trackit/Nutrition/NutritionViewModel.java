@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -38,7 +40,7 @@ public class NutritionViewModel extends AndroidViewModel {
         repository.deleteAllNutritions();
     }
 
-    public List<Nutrition> getNutritionsByDate(String date)
+    public List<Nutrition> getNutritionsByDate(LocalDate date)
             throws ExecutionException, InterruptedException {
 
         return repository.getNutritionsByDate(date);

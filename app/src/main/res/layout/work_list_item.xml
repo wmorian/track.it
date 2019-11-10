@@ -13,20 +13,20 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="Length"
+            android:src="@drawable/ic_home_off"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kind"
+            android:text="Subject"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
             android:layout_toStartOf="@+id/place"
@@ -34,11 +34,18 @@
             android:ellipsize="end" />
 
         <TextView
-            android:id="@+id/start_time"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/subject"
-            android:text="Time of Day" />
+            android:text="from - to" />
+
+        <ImageView
+            android:id="@+id/thumb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/place"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

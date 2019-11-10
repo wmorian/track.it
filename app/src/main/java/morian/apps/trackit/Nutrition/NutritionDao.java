@@ -7,6 +7,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import org.joda.time.LocalDate;
+
 import java.util.List;
 
 @Dao
@@ -24,9 +26,9 @@ public interface NutritionDao {
     @Query("DELETE FROM nutrition_table")
     void deleteAllNutritions();
 
-    @Query("SELECT * FROM nutrition_table ORDER BY day ASC")
+    @Query("SELECT * FROM nutrition_table ORDER BY date ASC")
     LiveData<List<Nutrition>> getAllNutritions();
 
-    @Query("SELECT * FROM nutrition_table WHERE day=:currentDay ORDER BY day ASC")
-    List<Nutrition> getNutritionsByDate(String currentDay);
+    @Query("SELECT * FROM nutrition_table WHERE date=:currentDay ORDER BY date ASC")
+    List<Nutrition> getNutritionsByDate(LocalDate currentDay);
 }

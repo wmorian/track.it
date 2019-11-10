@@ -17,8 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import morian.apps.trackit.R;
 
@@ -35,23 +34,24 @@ public class DateFragment extends Fragment {
 
         textViewGlobalDate = view.findViewById(R.id.global_date);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        textViewGlobalDate.setText(formatter.format(date));
+        LocalDate date = LocalDate.now();
+        textViewGlobalDate.setText(date.toString("dd.MM.yyyy"));
 
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
-        textViewGlobalDate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                dateViewModel.setDate(textViewGlobalDate.getText().toString());
-            }
-        });
+//        textViewGlobalDate.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                dateViewModel.setDate(textViewGlobalDate.getText().toString());
+//            }
+//        });
 
         final FragmentManager fm = getActivity().getSupportFragmentManager();
         textViewGlobalDate.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +70,10 @@ public class DateFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            String date = data.getStringExtra("selectedDate");
-            textViewGlobalDate.setText(date);
+//            String date = data.getStringExtra("selectedDate");
+            LocalDate date = LocalDate.parse(data.getStringExtra("selectedDate"));
+            textViewGlobalDate.setText(date.toString("dd.MM.yyyy"));
+            dateViewModel.setDate(date);
         }
     }
 }

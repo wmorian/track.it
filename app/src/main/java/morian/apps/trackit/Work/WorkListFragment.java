@@ -1,4 +1,4 @@
-package morian.apps.trackit.Sport;
+package morian.apps.trackit.Work;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,12 +27,15 @@ import java.util.concurrent.ExecutionException;
 
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
+import morian.apps.trackit.Work.Work;
+import morian.apps.trackit.Work.WorkAdapter;
+import morian.apps.trackit.Work.WorkViewModel;
 import morian.apps.trackit.ViewPageFragmentLifecycle;
 
-public class SportListFragment extends Fragment implements ViewPageFragmentLifecycle {
+public class WorkListFragment extends Fragment implements ViewPageFragmentLifecycle {
 
-    private SportAdapter adapter;
-    private SportViewModel sportViewModel;
+    private WorkAdapter adapter;
+    private WorkViewModel workViewModel;
     private DateViewModel dateViewModel;
     private LocalDate currentDate;
 
@@ -43,9 +48,9 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setHasFixedSize(true);
 
-        adapter = new SportAdapter();
+        adapter = new WorkAdapter();
         recyclerView.setAdapter(adapter);
-        sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
+        workViewModel = ViewModelProviders.of(this).get(WorkViewModel.class);
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
 
         subscribeToDateChange();
@@ -53,7 +58,7 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
 
         // init list with the current date data
         initDate();
-        adapter.setSports(getSportsForCurrentDay());
+        adapter.setWorks(getWorksForCurrentDay());
 
         return view;
     }
@@ -63,7 +68,7 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
             @Override
             public void onChanged(LocalDate s) {
                 currentDate = s;
-                adapter.setSports(getSportsForCurrentDay());
+                adapter.setWorks(getWorksForCurrentDay());
             }
         });
     }
@@ -77,25 +82,25 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                sportViewModel.delete(adapter.getSportAt(viewHolder.getAdapterPosition()));
+                workViewModel.delete(adapter.getWorkAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Deleted!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private List<Sport> getSportsForCurrentDay() {
+    private List<Work> getWorksForCurrentDay() {
 
-        List<Sport> sports = new ArrayList<>();
+        List<Work> works = new ArrayList<>();
 
         try {
-            sports = sportViewModel.getSportsByDate(currentDate);
+            works = workViewModel.getWorksByDate(currentDate);
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
 
-        if (sports == null) sports = new ArrayList<>();
+        if (works == null) works = new ArrayList<>();
 
-        return sports;
+        return works;
     }
 
     private void initDate() {
@@ -109,6 +114,6 @@ public class SportListFragment extends Fragment implements ViewPageFragmentLifec
 
     @Override
     public void onResumeFragment() {
-        adapter.setSports(getSportsForCurrentDay());
+        adapter.setWorks(getWorksForCurrentDay());
     }
 }

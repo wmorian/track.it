@@ -3,7 +3,8 @@ package morian.apps.trackit.Work;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -29,7 +30,7 @@ public class WorkRepository {
         new DeleteWorkAsyncTask(workDao).execute(work);
     }
 
-    public List<Work> getWorksByDate(Date date)
+    public List<Work> getWorksByDate(LocalDate date)
             throws ExecutionException, InterruptedException {
         return new GetWorksByDateAsyncTask(workDao).execute(date).get();
     }
@@ -76,7 +77,7 @@ public class WorkRepository {
         }
     }
 
-    private static class GetWorksByDateAsyncTask extends AsyncTask<Date, Void, List<Work>> {
+    private static class GetWorksByDateAsyncTask extends AsyncTask<LocalDate, Void, List<Work>> {
         private WorkDao workDao;
 
         private GetWorksByDateAsyncTask(WorkDao workDao) {
@@ -84,7 +85,7 @@ public class WorkRepository {
         }
 
         @Override
-        protected List<Work> doInBackground(Date... date) {
+        protected List<Work> doInBackground(LocalDate... date) {
             return workDao.getWorksByDate(date[0]);
         }
     }

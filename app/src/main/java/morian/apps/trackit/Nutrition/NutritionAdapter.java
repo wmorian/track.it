@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,9 +24,6 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
     public NutritionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View nutritionView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.nutrition_list_item, parent, false);
-
-        RecyclerView recyclerView =  nutritionView.findViewById(R.id.recycle_view);
-//        nutritionView.setOnLongClickListener(new OnItemLongClickListener());
 
         return new NutritionHolder(nutritionView);
     }
@@ -68,20 +64,8 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
 
         public NutritionHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTime = itemView.findViewById(R.id.time_of_day);
+            textViewTime = itemView.findViewById(R.id.start_time);
             textViewItems = itemView.findViewById(R.id.items);
         }
     }
-
-//    class OnItemLongClickListener implements View.OnLongClickListener {
-//
-//        @Override
-//        public boolean onLongClick(View v) {
-//
-//            Toast.makeText(v.getContext(), "Long Click", Toast.LENGTH_SHORT).show();
-//
-//
-//            return false;
-//        }
-//    }
 }

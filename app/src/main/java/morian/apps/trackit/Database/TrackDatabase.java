@@ -14,8 +14,13 @@ import morian.apps.trackit.Sport.SportDao;
 import morian.apps.trackit.Work.Work;
 import morian.apps.trackit.Work.WorkDao;
 
-@Database(version = 1, entities = {Sport.class, Nutrition.class, Work.class})
-@TypeConverters({StringListConverter.class, TimeOfDayEnumConverter.class, TimeConverter.class})
+@Database(version = 2, entities = {Sport.class, Nutrition.class, Work.class})
+@TypeConverters({
+        StringListConverter.class,
+        TimeOfDayEnumConverter.class,
+        WorkplaceEnumConverter.class,
+        TimeConverter.class,
+        DateConverter.class})
 public abstract class TrackDatabase extends RoomDatabase {
 
     private static TrackDatabase instance;

@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import org.joda.time.LocalDate;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +33,7 @@ public class NutritionFragment extends Fragment {
 
     private NutritionViewModel nutritionViewModel;
     private DateViewModel dateViewModel;
-    private String currentDate;
+    private LocalDate currentDate;
 
     @Nullable
     @Override
@@ -51,7 +53,7 @@ public class NutritionFragment extends Fragment {
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {
-        Spinner timeOfDay = view.findViewById(R.id.time_of_day);
+        Spinner timeOfDay = view.findViewById(R.id.start_time);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -65,7 +67,7 @@ public class NutritionFragment extends Fragment {
         Button submit = view.findViewById(R.id.submit_nutrition);
 
         final TableLayout table = view.findViewById(R.id.nutrition_table);
-        final Spinner time = view.findViewById(R.id.time_of_day);
+        final Spinner time = view.findViewById(R.id.start_time);
         final EditText editTextMisc = view.findViewById(R.id.miscellenous);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -115,18 +117,16 @@ public class NutritionFragment extends Fragment {
 
     private void initDateViewModel() {
         dateViewModel = ViewModelProviders.of(getActivity()).get(DateViewModel.class);
-        dateViewModel.getDate().observe(this, new Observer<String>() {
+        dateViewModel.getDate().observe(this, new Observer<LocalDate>() {
 
             @Override
-            public void onChanged(String s) {
+            public void onChanged(LocalDate s) {
                 currentDate = s;
             }
         });
     }
 
     private void initDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        currentDate = formatter.format(date);
+        currentDate = LocalDate.now();
     }
 }
