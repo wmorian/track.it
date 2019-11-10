@@ -17,11 +17,11 @@ public class Sport {
     @ColumnInfo(name = "time_of_day")
     private String timeOfDay;
 
-    private String kind;
+    private SportKind kind;
 
     private int length;
 
-    public Sport(LocalDate date, String timeOfDay, String kind, int length) {
+    public Sport(LocalDate date, String timeOfDay, SportKind kind, int length) {
         this.date = date;
         this.timeOfDay = timeOfDay;
         this.kind = kind;
@@ -42,7 +42,7 @@ public class Sport {
         return timeOfDay;
     }
 
-    public String getKind() {
+    public SportKind getKind() {
         return kind;
     }
 

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "f18b5c9fac53f8ac137eddce0ca44521",
+    "identityHash": "8b95df530ed276fbe3999e4e3b17562c",
     "entities": [
       {
         "tableName": "sport_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT, `time_of_day` TEXT, `kind` TEXT, `length` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT, `time_of_day` TEXT, `kind` INTEGER, `length` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -29,7 +29,7 @@
           {
             "fieldPath": "kind",
             "columnName": "kind",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -146,7 +146,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f18b5c9fac53f8ac137eddce0ca44521')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b95df530ed276fbe3999e4e3b17562c')"
     ]
   }
 }

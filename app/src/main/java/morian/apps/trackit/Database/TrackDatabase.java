@@ -19,6 +19,7 @@ import morian.apps.trackit.Work.WorkDao;
         StringListConverter.class,
         TimeOfDayEnumConverter.class,
         WorkplaceEnumConverter.class,
+        SportKindEnumConverter.class,
         TimeConverter.class,
         DateConverter.class})
 public abstract class TrackDatabase extends RoomDatabase {

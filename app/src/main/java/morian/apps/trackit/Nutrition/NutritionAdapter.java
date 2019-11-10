@@ -64,8 +64,8 @@ public class NutritionAdapter extends RecyclerView.Adapter<NutritionAdapter.Nutr
 
         public NutritionHolder(@NonNull View itemView) {
             super(itemView);
-            textViewTime = itemView.findViewById(R.id.start_time);
-            textViewItems = itemView.findViewById(R.id.items);
+            textViewTime = itemView.findViewById(R.id.card_nutrition_time_of_day);
+            textViewItems = itemView.findViewById(R.id.card_nutrition_items);
         }
     }
 }

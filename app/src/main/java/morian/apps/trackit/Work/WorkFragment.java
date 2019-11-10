@@ -59,10 +59,10 @@ public class WorkFragment extends Fragment {
     }
 
     private void initTimePickers(View view) {
-        NumberPicker start_hr_np = view.findViewById(R.id.start_time_hr);
-        NumberPicker start_min_np = view.findViewById(R.id.start_time_min);
-        NumberPicker end_hr_np = view.findViewById(R.id.end_time_hr);
-        NumberPicker end_min_np = view.findViewById(R.id.end_time_min);
+        NumberPicker start_hr_np = view.findViewById(R.id.work_start_time_hr);
+        NumberPicker start_min_np = view.findViewById(R.id.work_start_time_min);
+        NumberPicker end_hr_np = view.findViewById(R.id.work_end_time_hr);
+        NumberPicker end_min_np = view.findViewById(R.id.work_end_time_min);
 
         start_hr_np.setMinValue(0);
         start_hr_np.setMaxValue(23);
@@ -90,15 +90,15 @@ public class WorkFragment extends Fragment {
     private void initButtons(View view) {
         workViewModel = ViewModelProviders.of(this).get(WorkViewModel.class);
 
-        final ToggleButton workBtn = view.findViewById(R.id.work_btn);
-        final ToggleButton homeBtn = view.findViewById(R.id.home_btn);
-        final ToggleButton thumbUpBtn = view.findViewById(R.id.thumb_up_btn);
-        final ToggleButton thumbDownBtn = view.findViewById(R.id.thumb_down_btn);
-        final EditText subjectTxt = view.findViewById(R.id.subject_txt);
-        final NumberPicker startHour = view.findViewById(R.id.start_time_hr);
-        final NumberPicker startMin = view.findViewById(R.id.start_time_min);
-        final NumberPicker endHour = view.findViewById(R.id.end_time_hr);
-        final NumberPicker endMin = view.findViewById(R.id.end_time_min);
+        final ToggleButton workBtn = view.findViewById(R.id.work_work_btn);
+        final ToggleButton homeBtn = view.findViewById(R.id.work_home_btn);
+        final ToggleButton thumbUpBtn = view.findViewById(R.id.work_thumb_up_btn);
+        final ToggleButton thumbDownBtn = view.findViewById(R.id.work_thumb_down_btn);
+        final EditText subjectTxt = view.findViewById(R.id.work_subject_txt);
+        final NumberPicker startHour = view.findViewById(R.id.work_start_time_hr);
+        final NumberPicker startMin = view.findViewById(R.id.work_start_time_min);
+        final NumberPicker endHour = view.findViewById(R.id.work_end_time_hr);
+        final NumberPicker endMin = view.findViewById(R.id.work_end_time_min);
         Button submitBtn = view.findViewById(R.id.submit_work);
 
         workBtn.setOnClickListener(new View.OnClickListener() {

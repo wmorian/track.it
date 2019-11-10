@@ -13,31 +13,29 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/card_sport_kind"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="Length"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_alignParentRight="true" />
 
         <TextView
-            android:id="@+id/subject"
+            android:id="@+id/card_sport_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kind"
+            android:text="Length"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
-            android:layout_toStartOf="@+id/place"
+            android:layout_toStartOf="@+id/card_sport_kind"
             android:layout_alignParentStart="true"
             android:ellipsize="end" />
 
         <TextView
-            android:id="@+id/start_time"
+            android:id="@+id/card_sport_time_of_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subject"
+            android:layout_below="@+id/card_sport_length"
             android:text="Time of Day" />
 
     </RelativeLayout>

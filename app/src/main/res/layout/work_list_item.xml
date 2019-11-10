@@ -14,7 +14,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/place"
+            android:id="@+id/card_work_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -23,28 +23,28 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/subject"
+            android:id="@+id/card_work_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Subject"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
-            android:layout_toStartOf="@+id/place"
+            android:layout_toStartOf="@+id/card_work_place"
             android:layout_alignParentStart="true"
             android:ellipsize="end" />
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/card_work_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subject"
+            android:layout_below="@+id/card_work_subject"
             android:text="from - to" />
 
         <ImageView
-            android:id="@+id/thumb"
+            android:id="@+id/card_work_thumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/place"
+            android:layout_below="@+id/card_work_place"
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>

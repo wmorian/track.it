@@ -7,7 +7,7 @@
     android:background="@android:color/white">
 
     <EditText
-        android:id="@+id/subject_txt"
+        android:id="@+id/work_subject_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,55 +20,55 @@
 
 
     <ToggleButton
-        android:id="@+id/work_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/work_work_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_work_toggle"
         android:textOff=""
         android:textOn=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subject_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/work_subject_txt" />
 
     <ToggleButton
-        android:id="@+id/home_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:id="@+id/work_home_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_home_toggle"
         android:textOff=""
         android:textOn=""
-        app:layout_constraintStart_toEndOf="@+id/work_btn"
-        app:layout_constraintTop_toBottomOf="@+id/subject_txt" />
+        app:layout_constraintStart_toEndOf="@+id/work_work_btn"
+        app:layout_constraintTop_toBottomOf="@+id/work_subject_txt" />
 
     <ToggleButton
-        android:id="@+id/thumb_up_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/work_thumb_up_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/ic_thump_up_toggle"
         android:textOff=""
         android:textOn=""
-        app:layout_constraintEnd_toStartOf="@id/thumb_down_btn"
-        app:layout_constraintTop_toBottomOf="@+id/subject_txt" />
+        app:layout_constraintEnd_toStartOf="@id/work_thumb_down_btn"
+        app:layout_constraintTop_toBottomOf="@+id/work_subject_txt" />
 
     <ToggleButton
-        android:id="@+id/thumb_down_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="64dp"
+        android:id="@+id/work_thumb_down_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/ic_thump_down_toggle"
         android:textOff=""
         android:textOn=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subject_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/work_subject_txt" />
 
     <LinearLayout
-        android:id="@+id/start_layout"
+        android:id="@+id/work_start_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -76,17 +76,17 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_btn">
+        app:layout_constraintTop_toBottomOf="@+id/work_work_btn">
 
         <TextView
-            android:id="@+id/start_txt"
+            android:id="@+id/work_start_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="START"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toStartOf="@+id/end_txt"
+            app:layout_constraintEnd_toStartOf="@+id/work_end_txt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/work_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/work_work_btn" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
             android:gravity="center_vertical">
 
             <NumberPicker
-                android:id="@+id/start_time_hr"
+                android:id="@+id/work_start_time_hr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:descendantFocusability="blocksDescendants" />
@@ -106,17 +106,17 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <NumberPicker
-                android:id="@+id/start_time_min"
+                android:id="@+id/work_start_time_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"/>
+                android:descendantFocusability="blocksDescendants" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/end_layout"
+        android:id="@+id/work_end_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -124,17 +124,17 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thumb_up_btn">
+        app:layout_constraintTop_toBottomOf="@+id/work_thumb_up_btn">
 
         <TextView
-            android:id="@+id/end_txt"
+            android:id="@+id/work_end_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="END"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintEnd_toStartOf="@+id/end_txt"
+            app:layout_constraintEnd_toStartOf="@+id/work_end_txt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/work_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/work_work_btn" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -142,10 +142,10 @@
             android:gravity="center_vertical">
 
             <NumberPicker
-                android:id="@+id/end_time_hr"
+                android:id="@+id/work_end_time_hr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"/>
+                android:descendantFocusability="blocksDescendants" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,10 +154,10 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <NumberPicker
-                android:id="@+id/end_time_min"
+                android:id="@+id/work_end_time_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"/>
+                android:descendantFocusability="blocksDescendants" />
 
         </LinearLayout>
 

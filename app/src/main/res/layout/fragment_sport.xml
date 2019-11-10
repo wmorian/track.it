@@ -7,7 +7,7 @@
     android:background="@android:color/white">
 
     <Spinner
-        android:id="@+id/start_time"
+        android:id="@+id/sport_time_of_day"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,93 +20,93 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/subject"
+        android:id="@+id/sport_layout_kind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/place"
+        app:layout_constraintBottom_toTopOf="@+id/sport_length"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_time">
+        app:layout_constraintTop_toBottomOf="@+id/sport_time_of_day">
 
         <ToggleButton
-            android:id="@+id/running"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/sport_running"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_running_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/exercise"
+            app:layout_constraintEnd_toStartOf="@id/sport_exercise"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/exercise"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/sport_exercise"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_exercise_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/stretching"
-            app:layout_constraintStart_toEndOf="@id/running"
+            app:layout_constraintEnd_toStartOf="@+id/sport_stretching"
+            app:layout_constraintStart_toEndOf="@id/sport_running"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/stretching"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/sport_stretching"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_stretching_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/yoga"
-            app:layout_constraintStart_toEndOf="@+id/exercise"
+            app:layout_constraintEnd_toStartOf="@+id/sport_yoga"
+            app:layout_constraintStart_toEndOf="@+id/sport_exercise"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/yoga"
-            android:layout_width="0dp"
-            android:layout_height="00dp"
+            android:id="@+id/sport_yoga"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_yoga_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cycling"
-            app:layout_constraintStart_toEndOf="@+id/stretching"
+            app:layout_constraintEnd_toStartOf="@+id/sport_cycling"
+            app:layout_constraintStart_toEndOf="@+id/sport_stretching"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/cycling"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/sport_cycling"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_cycling_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/walking"
-            app:layout_constraintStart_toEndOf="@+id/yoga"
+            app:layout_constraintEnd_toStartOf="@+id/sport_walking"
+            app:layout_constraintStart_toEndOf="@+id/sport_yoga"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/walking"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/sport_walking"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_walking_toggle"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cycling"
+            app:layout_constraintStart_toEndOf="@+id/sport_cycling"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/place"
+        android:id="@+id/sport_length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -117,64 +117,64 @@
         android:hint="length in min"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subject" />
+        app:layout_constraintTop_toBottomOf="@+id/sport_layout_kind" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/length_helper_buttons"
+        android:id="@+id/sport_length_helper_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        app:layout_constraintTop_toBottomOf="@id/place">
+        app:layout_constraintTop_toBottomOf="@id/sport_length">
 
         <Button
-            android:id="@+id/min_60"
+            android:id="@+id/sport_min_60"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="60 min"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/min_30"
+            app:layout_constraintEnd_toStartOf="@id/sport_min_30"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/min_30"
+            android:id="@+id/sport_min_30"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="30 min"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/min_10"
-            app:layout_constraintStart_toEndOf="@+id/min_60"
+            app:layout_constraintEnd_toStartOf="@+id/sport_min_10"
+            app:layout_constraintStart_toEndOf="@+id/sport_min_60"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/min_10"
+            android:id="@+id/sport_min_10"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="10 min"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/min_5"
-            app:layout_constraintStart_toEndOf="@+id/min_30"
+            app:layout_constraintEnd_toStartOf="@+id/sport_min_5"
+            app:layout_constraintStart_toEndOf="@+id/sport_min_30"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/min_5"
+            android:id="@+id/sport_min_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="5 min"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/min_clear"
-            app:layout_constraintStart_toEndOf="@id/min_10"
+            app:layout_constraintEnd_toStartOf="@id/sport_min_clear"
+            app:layout_constraintStart_toEndOf="@id/sport_min_10"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/min_clear"
+            android:id="@+id/sport_min_clear"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_delete"
@@ -182,7 +182,7 @@
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/min_5"
+            app:layout_constraintStart_toEndOf="@id/sport_min_5"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ public class SportFragment extends Fragment {
     private SportViewModel sportViewModel;
     private DateViewModel dateViewModel;
     private LocalDate currentDate;
-    private String kindOfSport;
+    private SportKind kindOfSport;
 
     public SportFragment() {
     }
@@ -68,29 +68,29 @@ public class SportFragment extends Fragment {
         activeSport.setChecked(true);
 
         switch (activeSport.getId()) {
-            case R.id.running:
-                kindOfSport = "running";
+            case R.id.sport_running:
+                kindOfSport = SportKind.RUNNING;
                 break;
-            case R.id.exercise:
-                kindOfSport = "exercise";
+            case R.id.sport_exercise:
+                kindOfSport = SportKind.EXERCISE;
                 break;
-            case R.id.stretching:
-                kindOfSport = "stretching";
+            case R.id.sport_stretching:
+                kindOfSport = SportKind.STRETCHING;
                 break;
-            case R.id.yoga:
-                kindOfSport = "yoga";
+            case R.id.sport_yoga:
+                kindOfSport = SportKind.YOGA;
                 break;
-            case R.id.cycling:
-                kindOfSport = "cycling";
+            case R.id.sport_cycling:
+                kindOfSport = SportKind.CYCLING;
                 break;
-            case R.id.walking:
-                kindOfSport = "walking";
+            case R.id.sport_walking:
+                kindOfSport = SportKind.WALKING;
                 break;
         }
     }
 
     private void resetSportButtons(View view) {
-        final ConstraintLayout constraintLayout = view.findViewById(R.id.subject);
+        final ConstraintLayout constraintLayout = view.findViewById(R.id.sport_layout_kind);
         for (int i = 0; i < constraintLayout.getChildCount(); i++) {
             View current = constraintLayout.getChildAt(i);
             if (current instanceof ToggleButton) {
@@ -114,8 +114,8 @@ public class SportFragment extends Fragment {
         sportViewModel = ViewModelProviders.of(this).get(SportViewModel.class);
 
         Button submit = view.findViewById(R.id.submit_sport);
-        final Spinner time = view.findViewById(R.id.start_time);
-        final EditText length = view.findViewById(R.id.place);
+        final Spinner time = view.findViewById(R.id.sport_time_of_day);
+        final EditText length = view.findViewById(R.id.sport_length);
 
         submit.setOnClickListener(new View.OnClickListener() {
 
@@ -136,7 +136,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {
-        Spinner timeOfDay = view.findViewById(R.id.start_time);
+        Spinner timeOfDay = view.findViewById(R.id.sport_time_of_day);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -145,7 +145,7 @@ public class SportFragment extends Fragment {
     }
 
     private void initSportButtons(View view) {
-        ConstraintLayout layout = view.findViewById(R.id.subject);
+        ConstraintLayout layout = view.findViewById(R.id.sport_layout_kind);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             ToggleButton btn = (ToggleButton) layout.getChildAt(i);
@@ -160,12 +160,12 @@ public class SportFragment extends Fragment {
 
     private void initLengthHelper(View view) {
 
-        Button min60 = view.findViewById(R.id.min_60);
-        Button min30 = view.findViewById(R.id.min_30);
-        Button min10 = view.findViewById(R.id.min_10);
-        Button min5 = view.findViewById(R.id.min_5);
-        ImageButton clear = view.findViewById(R.id.min_clear);
-        final TextView textViewLength = view.findViewById(R.id.place);
+        Button min60 = view.findViewById(R.id.sport_min_60);
+        Button min30 = view.findViewById(R.id.sport_min_30);
+        Button min10 = view.findViewById(R.id.sport_min_10);
+        Button min5 = view.findViewById(R.id.sport_min_5);
+        ImageButton clear = view.findViewById(R.id.sport_min_clear);
+        final TextView textViewLength = view.findViewById(R.id.sport_length);
 
         min60.setOnClickListener(new View.OnClickListener() {
 

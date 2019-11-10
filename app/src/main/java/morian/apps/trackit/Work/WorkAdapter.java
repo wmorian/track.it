@@ -87,10 +87,10 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkHolder> {
 
         public WorkHolder(@NonNull View itemView) {
             super(itemView);
-            textViewSubject = itemView.findViewById(R.id.subject);
-            textViewTime = itemView.findViewById(R.id.time);
-            imageViewPlace = itemView.findViewById(R.id.place);
-            imageViewThumb = itemView.findViewById(R.id.thumb);
+            textViewSubject = itemView.findViewById(R.id.card_work_subject);
+            textViewTime = itemView.findViewById(R.id.card_work_time);
+            imageViewPlace = itemView.findViewById(R.id.card_work_place);
+            imageViewThumb = itemView.findViewById(R.id.card_work_thumb);
         }
     }
 }

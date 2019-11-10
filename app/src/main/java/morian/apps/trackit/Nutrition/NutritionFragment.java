@@ -21,9 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import org.joda.time.LocalDate;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import morian.apps.trackit.Date.DateViewModel;
@@ -53,7 +51,7 @@ public class NutritionFragment extends Fragment {
     }
 
     private void initTimeOfDaySpinner(@NonNull View view) {
-        Spinner timeOfDay = view.findViewById(R.id.start_time);
+        Spinner timeOfDay = view.findViewById(R.id.nutrition_time_of_day);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.time_of_day, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,8 +65,8 @@ public class NutritionFragment extends Fragment {
         Button submit = view.findViewById(R.id.submit_nutrition);
 
         final TableLayout table = view.findViewById(R.id.nutrition_table);
-        final Spinner time = view.findViewById(R.id.start_time);
-        final EditText editTextMisc = view.findViewById(R.id.miscellenous);
+        final Spinner timeOfDay = view.findViewById(R.id.nutrition_time_of_day);
+        final EditText editTextMisc = view.findViewById(R.id.nutrition_miscellenous);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +102,7 @@ public class NutritionFragment extends Fragment {
 
                 Nutrition nutrition = new Nutrition(
                         currentDate,
-                        time.getSelectedItem().toString(),
+                        timeOfDay.getSelectedItem().toString(),
                         items
                 );
 
