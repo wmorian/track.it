@@ -6,13 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.room.Room;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 
 import morian.apps.trackit.Date.DateFragment;
 import morian.apps.trackit.Nutrition.NutritionFragment;
@@ -114,6 +124,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
                         new WeatherFragment()).commit();
                 break;
+            case (R.id.nav_export_db):
+                try {
+                    File sd = Environment.getExternalStorageDirectory();
+
+                    if (sd.canWrite()) {
+                        String currentDBPath = getDatabasePath("track_database").getAbsolutePath();
+                        String backupDBPath = "track_database.db";
+
+                        File currentDB = new File(currentDBPath);
+                        File backupDB = new File(backupDBPath);
+
+                        if (currentDB.exists()) {
+                            FileChannel src = new FileInputStream(currentDB).getChannel();
+                            FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                            dst.transferFrom(src, 0, src.size());
+                            src.close();
+                            dst.close();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
         }
 
         drawer.closeDrawer(GravityCompat.START);

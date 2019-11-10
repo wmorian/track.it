@@ -33,7 +33,7 @@ public abstract class TrackDatabase extends RoomDatabase {
 
     public static synchronized TrackDatabase getInstance(Context context) {
         if (instance == null) {
-            context.deleteDatabase("track_database");
+//            context.deleteDatabase("track_database");
             instance = Room.databaseBuilder(
                     context.getApplicationContext(),
                     TrackDatabase.class,
