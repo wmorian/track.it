@@ -9,12 +9,14 @@ import androidx.room.TypeConverters;
 
 import morian.apps.trackit.Nutrition.Nutrition;
 import morian.apps.trackit.Nutrition.NutritionDao;
+import morian.apps.trackit.Sleep.Sleep;
+import morian.apps.trackit.Sleep.SleepDao;
 import morian.apps.trackit.Sport.Sport;
 import morian.apps.trackit.Sport.SportDao;
 import morian.apps.trackit.Work.Work;
 import morian.apps.trackit.Work.WorkDao;
 
-@Database(version = 2, entities = {Sport.class, Nutrition.class, Work.class})
+@Database(version = 3, entities = {Sport.class, Nutrition.class, Work.class, Sleep.class})
 @TypeConverters({
         StringListConverter.class,
         TimeOfDayEnumConverter.class,
@@ -29,6 +31,7 @@ public abstract class TrackDatabase extends RoomDatabase {
     abstract public SportDao getSportDao();
     abstract public NutritionDao getNutritionDao();
     abstract public WorkDao getWorkDao();
+    abstract public SleepDao getSleepDao();
 
 
     public static synchronized TrackDatabase getInstance(Context context) {

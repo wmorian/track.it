@@ -1,11 +1,10 @@
-package morian.apps.trackit.Work;
+package morian.apps.trackit.Sleep;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -22,16 +21,17 @@ import org.joda.time.LocalTime;
 import morian.apps.trackit.Date.DateViewModel;
 import morian.apps.trackit.R;
 
-public class WorkFragment extends Fragment {
+public class SleepFragment extends Fragment {
 
-    private WorkViewModel workViewModel;
+
+    private SleepViewModel sleepViewModel;
     private DateViewModel dateViewModel;
     private LocalDate currentDate;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_work, container, false);
+        View view = inflater.inflate(R.layout.fragment_sleep, container, false);
 
         initDate();
         initDateViewModel();
@@ -57,10 +57,14 @@ public class WorkFragment extends Fragment {
     }
 
     private void initTimePickers(View view) {
-        NumberPicker start_hr_np = view.findViewById(R.id.work_start_time_hr);
-        NumberPicker start_min_np = view.findViewById(R.id.work_start_time_min);
-        NumberPicker end_hr_np = view.findViewById(R.id.work_end_time_hr);
-        NumberPicker end_min_np = view.findViewById(R.id.work_end_time_min);
+        NumberPicker start_hr_np = view.findViewById(R.id.sleep_start_hr);
+        NumberPicker start_min_np = view.findViewById(R.id.sleep_start_min);
+        NumberPicker end_hr_np = view.findViewById(R.id.sleep_end_hr);
+        NumberPicker end_min_np = view.findViewById(R.id.sleep_end_min);
+        NumberPicker wc_hr_np = view.findViewById(R.id.sleep_wc_hr);
+        NumberPicker wc_min_np = view.findViewById(R.id.sleep_wc_min);
+        NumberPicker awake_hr_np = view.findViewById(R.id.sleep_awake_hr);
+        NumberPicker awake_min_np = view.findViewById(R.id.sleep_awake_min);
 
         start_hr_np.setMinValue(0);
         start_hr_np.setMaxValue(23);
@@ -71,6 +75,16 @@ public class WorkFragment extends Fragment {
         end_hr_np.setMaxValue(23);
         end_min_np.setMinValue(0);
         end_min_np.setMaxValue(11);
+
+        wc_hr_np.setMinValue(0);
+        wc_hr_np.setMaxValue(23);
+        wc_min_np.setMinValue(0);
+        wc_min_np.setMaxValue(11);
+
+        awake_hr_np.setMinValue(0);
+        awake_hr_np.setMaxValue(23);
+        awake_min_np.setMinValue(0);
+        awake_min_np.setMaxValue(11);
 
         NumberPicker.Formatter formatter = new NumberPicker.Formatter() {
 
@@ -83,35 +97,24 @@ public class WorkFragment extends Fragment {
 
         start_min_np.setFormatter(formatter);
         end_min_np.setFormatter(formatter);
+        wc_min_np.setFormatter(formatter);
+        awake_min_np.setFormatter(formatter);
     }
 
     private void initButtons(View view) {
-        workViewModel = ViewModelProviders.of(this).get(WorkViewModel.class);
+        sleepViewModel = ViewModelProviders.of(this).get(SleepViewModel.class);
 
-        final ToggleButton workBtn = view.findViewById(R.id.work_work_btn);
-        final ToggleButton homeBtn = view.findViewById(R.id.work_home_btn);
-        final ToggleButton thumbUpBtn = view.findViewById(R.id.work_thumb_up_btn);
-        final ToggleButton thumbDownBtn = view.findViewById(R.id.work_thumb_down_btn);
-        final EditText subjectTxt = view.findViewById(R.id.work_subject_txt);
-        final NumberPicker startHour = view.findViewById(R.id.work_start_time_hr);
-        final NumberPicker startMin = view.findViewById(R.id.work_start_time_min);
-        final NumberPicker endHour = view.findViewById(R.id.work_end_time_hr);
-        final NumberPicker endMin = view.findViewById(R.id.work_end_time_min);
-        Button submitBtn = view.findViewById(R.id.submit_work);
-
-        workBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                homeBtn.setChecked(false);
-            }
-        });
-
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                workBtn.setChecked(false);
-            }
-        });
+        final ToggleButton thumbUpBtn = view.findViewById(R.id.sleep_thumb_up_btn);
+        final ToggleButton thumbDownBtn = view.findViewById(R.id.sleep_thumb_down_btn);
+        final NumberPicker startHour = view.findViewById(R.id.sleep_start_hr);
+        final NumberPicker startMin = view.findViewById(R.id.sleep_start_min);
+        final NumberPicker endHour = view.findViewById(R.id.sleep_end_hr);
+        final NumberPicker endMin = view.findViewById(R.id.sleep_end_min);
+        final NumberPicker wcHour = view.findViewById(R.id.sleep_wc_hr);
+        final NumberPicker wcMin = view.findViewById(R.id.sleep_wc_min);
+        final NumberPicker awakeHour = view.findViewById(R.id.sleep_awake_hr);
+        final NumberPicker awakeMin = view.findViewById(R.id.sleep_awake_min);
+        Button submitBtn = view.findViewById(R.id.submit_sleep);
 
         thumbUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,42 +134,34 @@ public class WorkFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                LocalTime startTime = new LocalTime(startHour.getValue(), startMin.getValue());
+                LocalTime startTime = new LocalTime(startHour.getValue(), startMin.getValue() * 5);
                 LocalTime endTime = new LocalTime(endHour.getValue(), endMin.getValue() * 5);
-                Work work = new Work(
+                LocalTime wcTime = new LocalTime(wcHour.getValue(), wcMin.getValue() * 5);
+                LocalTime awakeTime = new LocalTime(awakeHour.getValue(), awakeMin.getValue() * 5);
+                Sleep sleep = new Sleep(
                         currentDate,
-                        getWorkplace(workBtn, homeBtn),
                         startTime,
                         endTime,
-                        subjectTxt.getText().toString(),
+                        wcTime,
+                        awakeTime,
                         getSatisfaction(thumbUpBtn, thumbDownBtn)
                 );
 
-                workViewModel.insert(work);
-                workBtn.setChecked(false);
-                homeBtn.setChecked(false);
+                sleepViewModel.insert(sleep);
                 thumbDownBtn.setChecked(false);
                 thumbUpBtn.setChecked(false);
-                subjectTxt.setText("");
                 startHour.setValue(0);
                 startMin.setValue(0);
                 endHour.setValue(0);
                 endMin.setValue(0);
+                wcHour.setValue(0);
+                wcMin.setValue(0);
+                awakeHour.setValue(0);
+                awakeMin.setValue(0);
 
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private Workplace getWorkplace(ToggleButton workBtn, ToggleButton homeBtn) {
-        if (workBtn.isChecked()) {
-            return Workplace.Work;
-        }
-        else if (homeBtn.isChecked()) {
-            return Workplace.HOME;
-        }
-
-        return null;
     }
 
     private Boolean getSatisfaction(ToggleButton thumbUpBtn, ToggleButton thumbDownBtn) {

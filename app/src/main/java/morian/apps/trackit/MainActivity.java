@@ -27,6 +27,8 @@ import java.nio.channels.FileChannel;
 import morian.apps.trackit.Date.DateFragment;
 import morian.apps.trackit.Nutrition.NutritionFragment;
 import morian.apps.trackit.Nutrition.NutritionListFragment;
+import morian.apps.trackit.Sleep.SleepFragment;
+import morian.apps.trackit.Sleep.SleepListFragment;
 import morian.apps.trackit.Sport.SportFragment;
 import morian.apps.trackit.Sport.SportListFragment;
 import morian.apps.trackit.Weather.WeatherFragment;
@@ -95,28 +97,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case (R.id.nav_nutrition):
-                adapter.updateTitle(0, "Nutrition");
-                adapter.notifyDataSetChanged();
-                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
-                        new NutritionFragment()).commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
-                        new NutritionListFragment()).commit();
+                openNutritionPage();
                 break;
             case (R.id.nav_sport):
-                adapter.updateTitle(0, "Sport");
-                adapter.notifyDataSetChanged();
-                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
-                        new SportFragment()).commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
-                        new SportListFragment()).commit();
+                openSportPage();
                 break;
             case (R.id.nav_work):
-                adapter.updateTitle(0, "Work");
-                adapter.notifyDataSetChanged();
-                getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
-                        new WorkFragment()).commit();
-                getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
-                        new WorkListFragment()).commit();
+                openWorkPage();
+                break;
+            case (R.id.nav_sleep):
+                openSleepPage();
                 break;
             case (R.id.nav_weather):
                 adapter.updateTitle(0, "Weather");
@@ -153,6 +143,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void openSleepPage() {
+        adapter.updateTitle(0, "Sleep");
+        adapter.notifyDataSetChanged();
+        getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
+                new SleepFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                new SleepListFragment()).commit();
+    }
+
+    private void openWorkPage() {
+        adapter.updateTitle(0, "Work");
+        adapter.notifyDataSetChanged();
+        getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
+                new WorkFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                new WorkListFragment()).commit();
+    }
+
+    private void openSportPage() {
+        adapter.updateTitle(0, "Sport");
+        adapter.notifyDataSetChanged();
+        getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
+                new SportFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                new SportListFragment()).commit();
+    }
+
+    private void openNutritionPage() {
+        adapter.updateTitle(0, "Nutrition");
+        adapter.notifyDataSetChanged();
+        getSupportFragmentManager().beginTransaction().replace(R.id.root_add_frame,
+                new NutritionFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.list_frame,
+                new NutritionListFragment()).commit();
     }
 
     private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
