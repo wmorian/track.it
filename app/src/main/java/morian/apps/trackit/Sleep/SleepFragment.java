@@ -1,10 +1,12 @@
 package morian.apps.trackit.Sleep;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -23,7 +25,8 @@ import morian.apps.trackit.R;
 
 public class SleepFragment extends Fragment {
 
-
+    private boolean isWCLayoutEnabled;
+    private boolean isAwakeLayoutEnabled;
     private SleepViewModel sleepViewModel;
     private DateViewModel dateViewModel;
     private LocalDate currentDate;
@@ -38,11 +41,47 @@ public class SleepFragment extends Fragment {
         initTimePickers(view);
         initButtons(view);
 
+        final ViewGroup wcLayout = view.findViewById(R.id.sleep_wc_layout);
+        setEnableChildElements(wcLayout, false);
+        isWCLayoutEnabled = false;
+
+        final ViewGroup awakeLayout = view.findViewById(R.id.sleep_awake_layout);
+        setEnableChildElements(awakeLayout, false);
+        isAwakeLayoutEnabled = false;
+
+        wcLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setEnableChildElements(wcLayout, true);
+                isWCLayoutEnabled = true;
+                return true;
+            }
+        });
+
+        awakeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setEnableChildElements(awakeLayout, true);
+                isAwakeLayoutEnabled = true;
+                return true;
+            }
+        });
+
         return view;
     }
 
     private void initDate() {
         currentDate = LocalDate.now();
+    }
+
+    private void setEnableChildElements(ViewGroup viewGroup, boolean enable) {
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            child.setEnabled(enable);
+            if (child instanceof ViewGroup) {
+                setEnableChildElements((ViewGroup) child, enable);
+            }
+        }
     }
 
     private void initDateViewModel() {
@@ -114,6 +153,9 @@ public class SleepFragment extends Fragment {
         final NumberPicker wcMin = view.findViewById(R.id.sleep_wc_min);
         final NumberPicker awakeHour = view.findViewById(R.id.sleep_awake_hr);
         final NumberPicker awakeMin = view.findViewById(R.id.sleep_awake_min);
+        final ViewGroup wcLayout = view.findViewById(R.id.sleep_wc_layout);
+        final ViewGroup awakeLayout = view.findViewById(R.id.sleep_awake_layout);
+
         Button submitBtn = view.findViewById(R.id.submit_sleep);
 
         thumbUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +178,17 @@ public class SleepFragment extends Fragment {
 
                 LocalTime startTime = new LocalTime(startHour.getValue(), startMin.getValue() * 5);
                 LocalTime endTime = new LocalTime(endHour.getValue(), endMin.getValue() * 5);
-                LocalTime wcTime = new LocalTime(wcHour.getValue(), wcMin.getValue() * 5);
-                LocalTime awakeTime = new LocalTime(awakeHour.getValue(), awakeMin.getValue() * 5);
+
+                LocalTime wcTime = null;
+                if (isWCLayoutEnabled) {
+                  wcTime = new LocalTime(wcHour.getValue(), wcMin.getValue() * 5);
+                }
+
+                LocalTime awakeTime = null;
+                if (isAwakeLayoutEnabled) {
+                    awakeTime = new LocalTime(awakeHour.getValue(), awakeMin.getValue() * 5);
+                }
+
                 Sleep sleep = new Sleep(
                         currentDate,
                         startTime,
@@ -158,6 +209,9 @@ public class SleepFragment extends Fragment {
                 wcMin.setValue(0);
                 awakeHour.setValue(0);
                 awakeMin.setValue(0);
+
+                setEnableChildElements(wcLayout, false);
+                setEnableChildElements(awakeLayout, false);
 
                 Toast.makeText(getActivity(), "Done!", Toast.LENGTH_SHORT).show();
             }
